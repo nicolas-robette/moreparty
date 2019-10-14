@@ -37,7 +37,7 @@ A list with the following elements :
 \item{oob.error.1se}{OOB error of the forest with 1 standard error rule}
 }
 \references{
-B. Gregorutti, B. Michel, and P. Saint Pierre. "Correlation and variable importance in random forests". arXiv:1310.5726, 2013.
+B. Gregorutti, B. Michel, and P. Saint Pierre. "Correlation and variable importance in random forests". arXiv:1310.5726, 2017.
 
 A. Hapfelmeier and K. Ulm. "A new variable selection approach using random forests". \emph{Computational Statistics and Data Analysis}, 60:50–69, 2013.
 }

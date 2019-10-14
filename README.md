@@ -2,7 +2,8 @@
 
 ## an R package for conditional inference random forests
 
-This package aims at complementing the party package, with parallelization and interpretation tools. It provides functions for :
+This package aims at complementing the party package, with parallelization and interpretation tools.
+It provides functions for :
 
 * parallelized conditional random forest
 * parallelized variable importance

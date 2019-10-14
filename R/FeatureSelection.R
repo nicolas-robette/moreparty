@@ -1,5 +1,5 @@
-#' @import party
-#'
+# @import party
+#
 #' @importFrom stats predict
 #'
 #' @export
@@ -21,8 +21,8 @@ FeatureSelection <- function(Y, X, recompute = F, ntree = 3000, measure = NULL) 
     vi_fct <- function(x,measure) { varImp::varImp(x, measure=measure) }
   }
 
-  forest <- cforest(response ~ ., data = dat, # fit a forest
-                    controls = cforest_unbiased(mtry = mtry, ntree = ntree))
+  forest <- party::cforest(response ~ ., data = dat, # fit a forest
+                          controls = party::cforest_unbiased(mtry = mtry, ntree = ntree))
   selections <- list() # a list that contains the sequence of selected variables
   selections[[ncol(X)]] <- names(sort(vi_fct(forest, measure), decreasing = T))
   errors <- c()
@@ -31,9 +31,9 @@ FeatureSelection <- function(Y, X, recompute = F, ntree = 3000, measure = NULL) 
     print(paste('steps to go =',i))
     if(class(Y)=='factor') mtry <- ceiling(sqrt(i)) # set mtry to sqrt() of remaining variables
     if(class(Y)=='numeric') mtry <- ceiling(i/3) # set mtry to ()/3 of remaining variables
-    forest <- cforest(as.formula(paste("response", paste(selections[[i]],
+    forest <- party::cforest(as.formula(paste("response", paste(selections[[i]],
                                                          collapse = " + "), sep = " ~ ")), data = dat, # fit forest
-                      controls = cforest_unbiased(mtry = mtry, ntree = ntree))
+                             controls = party::cforest_unbiased(mtry = mtry, ntree = ntree))
     errors[i] <- mean((as.numeric(Y) - # compute the OOB-error
                          as.numeric(predict(forest, OOB = T)))^2)
     # define the next set of variables
@@ -54,14 +54,14 @@ FeatureSelection <- function(Y, X, recompute = F, ntree = 3000, measure = NULL) 
   if (optimum.number.1se == 1) {forest.1se <- c(); selection.1se <- c()}
   if (optimum.number.0se != 1) {
     selection.0se <- selections[[optimum.number.0se - 1]]
-    forest.0se <- cforest(as.formula(paste("response", paste(selection.0se,
+    forest.0se <- party::cforest(as.formula(paste("response", paste(selection.0se,
                                                              collapse = " + "), sep = " ~ ")), data = dat,
-                          controls = cforest_unbiased(mtry = mtry, ntree = ntree))}
+                                 controls = party::cforest_unbiased(mtry = mtry, ntree = ntree))}
   if (optimum.number.1se != 1) {
     selection.1se <- selections[[optimum.number.1se - 1]]
-    forest.1se <- cforest(as.formula(paste("response", paste(selection.1se,
+    forest.1se <- party::cforest(as.formula(paste("response", paste(selection.1se,
                                                              collapse = " + "), sep = " ~ ")), data = dat,
-                          controls = cforest_unbiased(mtry = mtry, ntree = ntree))}
+                                 controls = party::cforest_unbiased(mtry = mtry, ntree = ntree))}
   oob.error.0se <- errors[optimum.number.0se]
   oob.error.1se <- errors[optimum.number.1se]
   selection.0se <- names(X)[as.numeric(gsub('V','',selection.0se))]

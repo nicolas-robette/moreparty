@@ -1,0 +1,15 @@
+Package: moreparty
+Type: Package
+Title: A Toolbox for Conditional Inference Random Forests
+Version: 0.1.0
+Depends: R (>= 3.1.0)
+Imports: party, varImp, coin, plyr, foreach, measures
+Suggests: pdp, vip, doParallel
+Author: Nicolas Robette
+Maintainer: Nicolas Robette <nicolas.robette@uvsq.fr>
+Description: This package provides complements to the party package : tools for the interpretation of forests, 
+    feature selection and parallelized versions of conditional forest and variable importance functions.
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1

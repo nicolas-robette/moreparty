@@ -11,7 +11,7 @@ It provides functions for :
 * surrogate tree
 * bivariate association measures
 * prototypes
-* a function to get any tree from a random forest
+* getting any tree from a random forest
 
 
 ## References

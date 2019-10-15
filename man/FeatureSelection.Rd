@@ -8,7 +8,7 @@ Recursive and non-recursive feature elimination for conditional random forests.
 Performs recursive or non-recursive feature algorithm fo a conditional random forest model.}
 
 \usage{
-FeatureSelection(Y, X, recompute = F, ntree = 3000, measure = NULL)
+FeatureSelection(Y, X, recompute = F, ntree = 3000, measure = NULL, parallel = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,6 +21,10 @@ FeatureSelection(Y, X, recompute = F, ntree = 3000, measure = NULL)
   \item{ntree}{number of trees contained in a forest}
 
   \item{measure}{The name of the measure of the \code{measures} package that should be used for the variable importance calculation.}
+  
+  \item{parallel}{Logical indicating whether or not to run \code{fastvarImp} in parallel using a backend provided by the \code{foreach} package. Default is \code{FALSE}.}
+  
+  \item{dots}{Further arguments (like positive or negativ class) that are needed by the measure.}
 }
 
 \details{

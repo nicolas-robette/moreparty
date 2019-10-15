@@ -5,7 +5,7 @@
 #' @export
 
 
-FeatureSelection <- function(Y, X, recompute = F, ntree = 3000, measure = NULL) {
+FeatureSelection <- function(Y, X, recompute = F, ntree = 3000, measure = NULL, parallel = FALSE, ...) {
 
   if(class(Y)=='factor') mtry <- ceiling(sqrt(ncol(X))) # automatically set mtry to sqrt(p)
   if(class(Y)=='numeric') mtry <- ceiling(ncol(X)/3) # automatically set mtry to p/3
@@ -14,11 +14,14 @@ FeatureSelection <- function(Y, X, recompute = F, ntree = 3000, measure = NULL) 
   names(dat) <- c("response", paste("V", 1:ncol(X), sep = ""))
 
   if(is.null(measure)) {
-    vi_fct <- function(x,measure) { varImp::varImp(x) }
+    #vi_fct <- function(x,measure) { varImp::varImp(x) }
+    vi_fct <- function(x,measure) { fastvarImp(x, parallel=parallel) }
   } else if(measure=="AUC") {
-    vi_fct <- function(x,measure) { -varImp::varImpAUC(x) }
+    #vi_fct <- function(x,measure) { -varImp::varImpAUC(x) }
+    vi_fct <- function(x,measure) { -fastvarImpAUC(x, parallel=parallel) }
   } else {
-    vi_fct <- function(x,measure) { varImp::varImp(x, measure=measure) }
+    #vi_fct <- function(x,measure) { varImp::varImp(x, measure=measure) }
+    vi_fct <- function(x,measure) { fastvarImp(x, measure=measure, parallel=parallel, ...) }
   }
 
   forest <- party::cforest(response ~ ., data = dat, # fit a forest

@@ -14,8 +14,9 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
   df <- cbind.data.frame(Y,X)
   formule <- as.formula(paste('Y ~',paste(xnames,collapse='+')))
   ct <- partykit::ctree(formule, df, control=partykit::ctree_control(stump=TRUE))
-  log.pval <- partykit::nodeapply(ct, ids = 1, function(n) partykit::info_node(n)$criterion)[[1]][2,]
-
+  info <- partykit::nodeapply(ct, ids = 1, function(n) partykit::info_node(n)$criterion)[[1]]
+  p.value <- info[2,]
+  criterion <- info[3,]
   res <- list()
   for(i in 1:ncol(X)) {
     # print(i)
@@ -39,8 +40,8 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
     res[[i]] <- data.frame(mesure,assoc,stringsAsFactors = F)
   }
   res <- do.call('rbind.data.frame',res)
-  restot <- data.frame(variable=xnames,log.pval=log.pval,measure=res$mesure,assoc=round(res$assoc,3))
-  restot <- restot[order(restot$log.pval),]
+  restot <- data.frame(variable=xnames,p.value=round(p.value,5),criterion=criterion,measure=res$mesure,assoc=round(res$assoc,3))
+  restot <- restot[order(restot$criterion, decreasing=T),]
   rownames(restot) <- NULL
 
   if(xx==TRUE) {
@@ -53,7 +54,9 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
       df <- data.frame(x1,x2,stringsAsFactors=F)
       df <- df[complete.cases(df),]
       ct <- partykit::ctree(x1~x2, data=df, control=partykit::ctree_control(stump=TRUE))
-      log.pval <- nodeapply(ct, ids = 1, function(n) info_node(n)$criterion)[[1]][2,]
+      info <- nodeapply(ct, ids = 1, function(n) info_node(n)$criterion)[[1]]
+      p.value <- info[2,]
+      criterion <- info[3,]
       
       if(class(x1) %in% c('numeric','integer') & class(x2) %in% c('numeric','integer')) {
         assoc <- cor(x1,x2, use='complete.obs', method='kendall')
@@ -72,12 +75,12 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
         assoc <- sqrt(chisq.test(t)$statistic / (length(Y)*(min(nrow(t),ncol(t))-1)))
         mesure="cramer"
       }
-      res[[i]] <- data.frame(mesure,assoc,log.pval,stringsAsFactors = F)
+      res[[i]] <- data.frame(mesure,assoc,p.value,criterion,stringsAsFactors = F)
     }
     res <- do.call('rbind.data.frame',res)
     noms <- do.call('rbind.data.frame',combi)
-    restot2 <- data.frame(variable1=noms[,1],variable2=noms[,2],log.pval=res$log.pval,measure=res$mesure,assoc=round(res$assoc,3),row.names=NULL)
-    restot2 <- restot2[order(restot2$log.pval),]
+    restot2 <- data.frame(variable1=noms[,1],variable2=noms[,2],p.value=round(res$p.value,5),criterion=res$criterion,measure=res$mesure,assoc=round(res$assoc,3),row.names=NULL)
+    restot2 <- restot2[order(restot2$criterion, decreasing=T),]
     rownames(restot2) <- NULL
   } else {
     restot2 <- NULL

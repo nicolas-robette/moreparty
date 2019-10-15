@@ -14,6 +14,19 @@ It provides functions for :
 * getting any tree from a random forest
 
 
+## installation
+
+Execute the following code within `R`:
+
+```r
+if (!require(devtools)){
+	install.packages('devtools')
+	library(devtools)
+}
+install_github("nicolas-robette/moreparty")
+```
+
+
 ## References
 
 Gregorutti B., B. Michel B., and Saint Pierre P. "Correlation and variable importance in random forests". arXiv:1310.5726, 2017.

@@ -4,7 +4,7 @@
 
 Prototypes <- function(label, x, prox, nProto = 5, nNbr = floor((min(table(label))-1)/nProto)) {
   foo <- function(xx) {
-    ifelse(is.numeric(xx),median(xx),names(which.max(table(xx))))
+    ifelse(is.numeric(xx),median(xx,na.rm=TRUE),names(which.max(table(xx))))
   }
   getProto <- function(whichLab) {
     l_prox <- prox

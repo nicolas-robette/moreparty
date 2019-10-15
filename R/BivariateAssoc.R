@@ -14,9 +14,14 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
   df <- cbind.data.frame(Y,X)
   formule <- as.formula(paste('Y ~',paste(xnames,collapse='+')))
   ct <- partykit::ctree(formule, df, control=partykit::ctree_control(stump=TRUE))
+<<<<<<< HEAD
   info <- partykit::nodeapply(ct, ids = 1, function(n) partykit::info_node(n)$criterion)[[1]]
   p.value <- info[2,]
   criterion <- info[3,]
+=======
+  log.pval <- partykit::nodeapply(ct, ids = 1, function(n) partykit::info_node(n)$criterion)[[1]][2,]
+
+>>>>>>> e7d3972432d46346c4853e3b0dc4d5c9771414ad
   res <- list()
   for(i in 1:ncol(X)) {
     # print(i)
@@ -57,7 +62,7 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
       info <- nodeapply(ct, ids = 1, function(n) info_node(n)$criterion)[[1]]
       p.value <- info[2,]
       criterion <- info[3,]
-      
+
       if(class(x1) %in% c('numeric','integer') & class(x2) %in% c('numeric','integer')) {
         assoc <- cor(x1,x2, use='complete.obs', method='kendall')
         mesure='kendall'

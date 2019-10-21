@@ -2,13 +2,15 @@
 \alias{FeatureSelection}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Recursive and non-recursive feature elimination for conditional random forests.
+Feature selection for conditional random forests.
 }
 \description{
-Performs recursive or non-recursive feature algorithm fo a conditional random forest model.}
+Performs feature selection for a conditional random forest model. Four approaches are available : non-recursive feature elimination (NRFE), recursive feature elimination (RFE), permutation test approach with permuted response (Altmann et al, 2010), permutation test approach with permuted predictors (Hapfelmeier et Ulm, 2013).}
 
 \usage{
-FeatureSelection(Y, X, recompute = F, ntree = 3000, measure = NULL, parallel = FALSE, ...)
+FeatureSelection(Y, X, method = 'NRFE', ntree = 1000, measure = NULL,
+                 nperm = 30, alpha = 0.05, distrib = 'approx',
+                 parallel = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,15 +18,21 @@ FeatureSelection(Y, X, recompute = F, ntree = 3000, measure = NULL, parallel = F
 
   \item{X}{matrix or data frame containing the predictors}
 
-  \item{recompute}{whether the variable importances should be recomputed after each rejection step (recursive algorithm) or not (non-recursive algorithm)}
+  \item{method}{method for feature selection. Should be 'NRFE' (non-recursive feature elimination, default), 'RFE' (recursive feature elimination), 'ALT' (permutation of response) or 'HAPF' (permutation of predictors)}
 
   \item{ntree}{number of trees contained in a forest}
 
-  \item{measure}{The name of the measure of the \code{measures} package that should be used for the variable importance calculation.}
+  \item{measure}{the name of the measure of the \code{measures} package that should be used for error and variable importance calculations.}
+  
+  \item{nperm}{number of permutations (only for 'ALT' and 'HAPF' methods)}
+  
+  \item{alpha}{alpha level for permutation tests (only for 'ALT' and 'HAPF' methods)}
+  
+  \item{distrib}{the null distribution of the variable importance can be approximated by its asymptotic distribution (\code{"asympt"}) or via Monte Carlo resampling (\code{"approx"}, default).}
   
   \item{parallel}{Logical indicating whether or not to run \code{fastvarImp} in parallel using a backend provided by the \code{foreach} package. Default is \code{FALSE}.}
   
-  \item{dots}{Further arguments (like positive or negativ class) that are needed by the measure.}
+  \item{\dots}{Further arguments (like positive or negative class) that are needed by the measure.}
 }
 
 \details{
@@ -44,6 +52,9 @@ A list with the following elements :
 B. Gregorutti, B. Michel, and P. Saint Pierre. "Correlation and variable importance in random forests". arXiv:1310.5726, 2017.
 
 A. Hapfelmeier and K. Ulm. "A new variable selection approach using random forests". \emph{Computational Statistics and Data Analysis}, 60:50–69, 2013.
+
+A. Altmann, L. Toloşi, O. Sander et T. Lengauer. "Permutation importance: a corrected feature importance measure". \emph{Bioinformatics}, 26(10):1340-1347, 2010.
+
 }
 \author{
 Nicolas Robette
@@ -64,9 +75,7 @@ Only works for regression and binary classification.
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species == "versicolor")
-  iris.cf = party::cforest(Species ~ ., data = iris2,
-                           control = party::cforest_unbiased(mtry = 2, ntree = 50))
-  featsel <- FeatureSelection(iris2$Species, iris2[,1:4],ntree=200)
+  featsel <- FeatureSelection(iris2$Species, iris2[,1:4], measure='ACC', ntree=200)
   featsel$selection.0se
   featsel$selection.1se
 }

@@ -1,5 +1,5 @@
-\name{getCtree}
-\alias{getCtree}
+\name{GetCtree}
+\alias{GetCtree}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Gets a tree from a conditional random forest
@@ -8,7 +8,7 @@ Gets a tree from a conditional random forest
 This function gets the ith tree from a conditional random forest as produced by \code{cforest}.
 }
 \usage{
-getCtree(object, k = 1)
+GetCtree(object, k = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,7 +20,7 @@ getCtree(object, k = 1)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-A tree of class \`code{BinaryTree}, as returned by \code{ctree} from \code{party} package.
+A tree of class \code{BinaryTree}, as returned by \code{ctree} from \code{party} package.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -43,7 +43,7 @@ Code taken from https://stackoverflow.com/questions/19924402/cforest-prints-empt
   iris2$Species = factor(iris$Species == "versicolor")
   iris.cf = party::cforest(Species ~ ., data = iris2,
             control = party::cforest_unbiased(mtry = 2, ntree = 50))
-  plot(getCtree(iris.cf))
+  plot(GetCtree(iris.cf))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

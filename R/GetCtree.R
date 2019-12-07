@@ -2,7 +2,7 @@
 
 #' @export
 
-getCtree <- function(object, k=1) {
+GetCtree <- function(object, k=1) {
   dt <- object@data@get("input")
   tr <- party::prettytree(object@ensemble[[k]], names(dt))
   tr_updated <- update_tree(tr, dt)

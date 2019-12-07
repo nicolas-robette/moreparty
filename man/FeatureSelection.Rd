@@ -24,11 +24,11 @@ FeatureSelection(Y, X, method = 'NRFE', ntree = 1000, measure = NULL,
 
   \item{measure}{the name of the measure of the \code{measures} package that should be used for error and variable importance calculations.}
   
-  \item{nperm}{number of permutations (only for 'ALT' and 'HAPF' methods)}
+  \item{nperm}{number of permutations. Only for 'ALT' and 'HAPF' methods.}
   
-  \item{alpha}{alpha level for permutation tests (only for 'ALT' and 'HAPF' methods)}
+  \item{alpha}{alpha level for permutation tests. Only for 'ALT' and 'HAPF' methods.}
   
-  \item{distrib}{the null distribution of the variable importance can be approximated by its asymptotic distribution (\code{"asympt"}) or via Monte Carlo resampling (\code{"approx"}, default).}
+  \item{distrib}{the null distribution of the variable importance can be approximated by its asymptotic distribution (\code{"asympt"}) or via Monte Carlo resampling (\code{"approx"}, default). Only for 'ALT' and 'HAPF' methods.}
   
   \item{parallel}{Logical indicating whether or not to run \code{fastvarImp} in parallel using a backend provided by the \code{foreach} package. Default is \code{FALSE}.}
   

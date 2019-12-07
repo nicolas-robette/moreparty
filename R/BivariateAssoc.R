@@ -1,7 +1,5 @@
 #' @importFrom stats as.formula chisq.test complete.cases cor lm
 
-#' @importFrom partykit nodeapply info_node
-
 #' @export
 
 BivariateAssoc <- function(Y,X,xx=TRUE) {
@@ -13,11 +11,10 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
   
   df <- cbind.data.frame(Y,X)
   formule <- as.formula(paste('Y ~',paste(xnames,collapse='+')))
-  ct <- partykit::ctree(formule, df, control=partykit::ctree_control(stump=TRUE))
-  info <- partykit::nodeapply(ct, ids = 1, function(n) partykit::info_node(n)$criterion)[[1]]
-  p.value <- info[2,]
-  criterion <- info[3,]
-                          
+  ct <- party::ctree(formule, df, controls=party::ctree_control(stump=TRUE))
+  p.value <- 1-nodes(ct,1)[[1]]$criterion$criterion
+  criterion <- -log(nodes(ct,1)[[1]]$criterion$criterion)
+
   res <- list()
   for(i in 1:ncol(X)) {
     # print(i)
@@ -42,7 +39,8 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
   }
   res <- do.call('rbind.data.frame',res)
   restot <- data.frame(variable=xnames,p.value=round(p.value,5),criterion=criterion,measure=res$mesure,assoc=round(res$assoc,3))
-  restot <- restot[order(restot$criterion, decreasing=T),]
+  restot <- restot[order(restot$criterion, decreasing=F),]
+  restot$criterion <- round(restot$criterion,10)
   rownames(restot) <- NULL
 
   if(xx==TRUE) {
@@ -54,10 +52,9 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
 
       df <- data.frame(x1,x2,stringsAsFactors=F)
       df <- df[complete.cases(df),]
-      ct <- partykit::ctree(x1~x2, data=df, control=partykit::ctree_control(stump=TRUE))
-      info <- nodeapply(ct, ids = 1, function(n) info_node(n)$criterion)[[1]]
-      p.value <- info[2,]
-      criterion <- info[3,]
+      ct <- party::ctree(x1~x2, data=df, controls=party::ctree_control(stump=TRUE))
+      p.value <- 1-nodes(ct,1)[[1]]$criterion$criterion
+      criterion <- -log(nodes(ct,1)[[1]]$criterion$criterion)
 
       if(class(x1) %in% c('numeric','integer') & class(x2) %in% c('numeric','integer')) {
         assoc <- cor(x1,x2, use='complete.obs', method='kendall')
@@ -81,7 +78,8 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
     res <- do.call('rbind.data.frame',res)
     noms <- do.call('rbind.data.frame',combi)
     restot2 <- data.frame(variable1=noms[,1],variable2=noms[,2],p.value=round(res$p.value,5),criterion=res$criterion,measure=res$mesure,assoc=round(res$assoc,3),row.names=NULL)
-    restot2 <- restot2[order(restot2$criterion, decreasing=T),]
+    restot2 <- restot2[order(restot2$criterion, decreasing=F),]
+    restot2$criterion <- round(restot2$criterion,10)
     rownames(restot2) <- NULL
   } else {
     restot2 <- NULL

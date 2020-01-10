@@ -40,7 +40,7 @@ a function to be applied to all response variables. By default, the \code{\link{
 an optional named list of scores to be attached to ordered factors
 }
   \item{parallel}{
-Logical indicating whether or not to run \code{fastvarImp} in parallel using a backend provided by the \code{foreach} package. Default is \code{FALSE}.
+Logical indicating whether or not to run \code{fastcforest} in parallel using a backend provided by the \code{foreach} package. Default is \code{TRUE}.
 }
 }
 

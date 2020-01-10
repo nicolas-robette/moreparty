@@ -70,7 +70,7 @@ RFE <- function(Y, X, ntree = 3000, measure = NULL, parallel = FALSE, ...) {
                           controls = party::cforest_unbiased(mtry = mtry, ntree = ntree),
                           parallel = parallel)
 
-    errors[i] <- error(forest)
+    errors[i] <- error(forest, ...)
     
     # define the next set of variables
     # if (recompute == F & i > 1) selections[[i - 1]] <- selections[[i]][-i]

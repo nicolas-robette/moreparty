@@ -12,7 +12,7 @@ GetSplitStats(ct)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{ct}{A tree of class \code{BinaryTree} (as returned by \code{ctree} from \code{party} package) or \code{constparty} (as returned by \code{ctree} from \code{partykit} package)}.}
+  \item{ct}{A tree of class \code{BinaryTree} (as returned by \code{ctree} from \code{party} package) or \code{constparty} (as returned by \code{ctree} from \code{partykit} package).}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~

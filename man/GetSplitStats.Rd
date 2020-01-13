@@ -12,13 +12,13 @@ GetSplitStats(ct)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{ct}{A tree of class \code{BinaryTree}, as returned by \code{ctree} from \code{party} package.}
+  \item{ct}{A tree of class \code{BinaryTree} (as returned by \code{ctree} from \code{party} package) or \code{constparty} (as returned by \code{ctree} from \code{partykit} package)}.}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-A list of vectors, one for each split in the tree. For each split, the vector corresponds to are log(1-p) for every predictors, with p the p-value of the permutation test of independence. Variables are sorted by decreasing degree of association with the dependent variable.
+A list of elements, one for each split in the tree. For each split, the vector corresponds to are log(1-p) for every predictors, with p the p-value of the permutation test of independence. Variables are sorted by decreasing degree of association with the dependent variable.
 }
 \references{
 Hothorn T, Hornik K, Van De Wiel MA, Zeileis A. "A lego system for conditional inference". \emph{The American Statistician}. 60:257–263, 2006.

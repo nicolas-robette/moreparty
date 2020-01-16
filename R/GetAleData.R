@@ -26,6 +26,8 @@ GetAleData <- function(object, xnames=NULL, order=1, grid.size=20, parallel=FALS
     }
     ale <- plyr::alply(xnames, 1, .fun=foo, .parallel=parallel, .paropts=list(.packages="iml"))
     ale <- do.call('rbind.data.frame',ale)
+    ale$cat <- as.character(ale$cat)
+    #ale$var <- as.character(ale$var)
   }
   if(order==2) {
     ale <- iml::FeatureEffect$new(predictor, feature=xnames, method='ale')$results

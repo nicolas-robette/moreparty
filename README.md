@@ -12,6 +12,7 @@ It provides functions for :
   - parallelized variable importance
   - feature selection : recursive and non-recursive feature elimination,
     algorithms based on permutation tests
+  - accumumlated local effects (ALE)
   - surrogate tree
   - prototypes
   - getting any tree from a forest
@@ -32,9 +33,11 @@ install_github("nicolas-robette/moreparty")
 
 ## references
 
-Altmann A., Toloşi L., Sander O., and Lengauer T.. “Permutation
+Altmann A., Toloşi L., Sander O., and Lengauer T. “Permutation
 importance: a corrected feature importance measure”. *Bioinformatics*,
 26(10):1340-1347, 2010.
+
+Apley, D. W., Zhu J. “Visualizing the Effects of Predictor Variables in Black Box Supervised Learning Models”. arXiv:1612.08468v2, 2019.
 
 Gregorutti B., Michel B., and Saint Pierre P. “Correlation and variable
 importance in random forests”. arXiv:1310.5726, 2017.

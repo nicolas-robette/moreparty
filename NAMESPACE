@@ -2,6 +2,7 @@
 
 export(BivariateAssoc)
 export(FeatureSelection)
+export(GetAleData)
 export(GetCtree)
 export(GetSplitStats)
 export(Prototypes)

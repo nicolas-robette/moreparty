@@ -43,14 +43,7 @@ https://christophm.github.io/interpretable-ml-book/.}
 \author{
 Nicolas Robette
 }
-%\note{
-%}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-%\seealso{
-%\code{ctree}
-%}
 \examples{
   data(iris)
   iris2 = iris

@@ -2,8 +2,7 @@
 
 ## an R package for conditional inference random forests
 
-This package aims at complementing the
-[`party`](https://cran.r-project.org/package=party)
+This package aims at complementing the [`party`](https://cran.r-project.org/package=party)
 package with parallelization and interpretation tools.
 
 It provides functions for :

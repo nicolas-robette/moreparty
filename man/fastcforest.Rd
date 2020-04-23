@@ -82,8 +82,6 @@ The code for parallelization is inspired by \url{https://stackoverflow.com/quest
 Nicolas Robette
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
 \code{\link{cforest}}, \code{\link{fastvarImp}}
 }

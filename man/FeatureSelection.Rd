@@ -63,8 +63,8 @@ Nicolas Robette
 The code is adapted from Hapfelmeier & Ulm (2013).
 
 Only works for regression and binary classification.
-
 }
+
 
 \examples{
   data(iris)

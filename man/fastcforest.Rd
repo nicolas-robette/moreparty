@@ -88,16 +88,15 @@ Nicolas Robette
 
 \examples{
   ## classification
-  if(requireNamespace("doParallel", quietly = TRUE)) {
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species=="versicolor")
-  set.seed(123)
-  library(doParallel)
-  registerDoParallel(cores=2)
-  iris.cf = fastcforest(Species~., data=iris2, parallel=TRUE)
-  stopImplicitCluster()
-  }
+  iris.cf = fastcforest(Species~., data=iris2, parallel=FALSE)
+  # for the parallelized version :
+  # library(doParallel)
+  # registerDoParallel(cores=2)
+  # iris.cf = fastcforest(Species~., data=iris2, parallel=TRUE)
+  # stopImplicitCluster()
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

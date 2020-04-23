@@ -62,18 +62,17 @@ Nicolas Robette
 \code{\link{varImp}}, \code{\link{fastvarImpAUC}}, \code{\link{cforest}}, \code{\link{fastcforest}}
 }
 \examples{
-  if(requireNamespace("doParallel", quietly = TRUE)) {
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species == "versicolor")
   iris.cf = party::cforest(Species ~ ., data = iris2,
             control = party::cforest_unbiased(mtry = 2, ntree = 50))
-  set.seed(123)
-  library(doParallel)
-  registerDoParallel(cores=2)
-  fastvarImp(object = iris.cf, measure='ACC')
-  stopImplicitCluster()
-  }
+  fastvarImp(object = iris.cf, measure='ACC', parallel=FALSE)          
+  # For parallelized version :
+  # library(doParallel)
+  # registerDoParallel(cores=2)
+  # fastvarImp(object = iris.cf, measure='ACC')
+  # stopImplicitCluster()
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

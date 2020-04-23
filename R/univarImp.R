@@ -71,18 +71,18 @@ univarImp = function(object, vname, mincriterion = 0, conditional = FALSE, thres
     }
     p = party_intern(tree, inp, mincriterion, -1L, fun = "R_predict") 
     eoob = error(p, oob, ...)
-    for (j in unique(varImp:::varIDs(tree))) {
+    for (j in unique(varIDs(tree))) {
       if(j==idv) {
           for (per in 1:nperm) {
             if (conditional || pre1.0_0) {
               tmp = inp
-              ccl = varImp:::create_cond_list(conditional, threshold, 
+              ccl = create_cond_list(conditional, threshold, 
                                      xnames[j], input)
               if (is.null(ccl)) {
                 perm = sample(which(oob))
               }
               else {
-                perm = varImp:::conditional_perm(ccl, xnames, input, 
+                perm = conditional_perm(ccl, xnames, input, 
                                         tree, oob)
               }
               tmp@variables[[j]][which(oob)] = tmp@variables[[j]][perm]

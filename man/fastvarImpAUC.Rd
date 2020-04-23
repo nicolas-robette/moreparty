@@ -51,18 +51,17 @@
 \code{varImpAUC}, \code{fastvarImp}, \code{cforest}, \code{fastcforest}
 }
 \examples{
-  ## if(requireNamespace("doParallel", quietly = TRUE)) {
-  library(doParallel)
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species == "versicolor")
   iris.cf = party::cforest(Species ~ ., data = iris2,
             control = party::cforest_unbiased(mtry = 2, ntree = 50))
-  set.seed(123)
-  registerDoParallel(cores=2)
-  fastvarImpAUC(object = iris.cf)
-  stopImplicitCluster()
-  #}
+  fastvarImpAUC(object = iris.cf, parallel = FALSE)
+  # For parallelized version :
+  # library(doParallel)
+  # registerDoParallel(cores=2)
+  # fastvarImpAUC(object = iris.cf)
+  # stopImplicitCluster()
 }
 \references{
 Janitza, S., Strobl, C. & Boulesteix, A.-L. An AUC-based permutation variable

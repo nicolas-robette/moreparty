@@ -32,7 +32,7 @@ GetAleData <- function(object, xnames=NULL, order=1, grid.size=20, parallel=FALS
   }
   if(order==2) {
     ale <- iml::FeatureEffect$new(predictor, feature=xnames, method='ale')$results
-    ale <- data.frame(ale[,xnames], ale=ale[,'.value'])
+    ale <- data.frame(ale[,xnames], ale=ale[,'.ale'])
   }
   return(ale)
 }

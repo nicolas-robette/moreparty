@@ -68,11 +68,6 @@ Nicolas Robette
   iris.cf = party::cforest(Species ~ ., data = iris2,
             control = party::cforest_unbiased(mtry = 2, ntree = 50))
   fastvarImp(object = iris.cf, measure='ACC', parallel=FALSE)          
-  # For parallelized version :
-  # library(doParallel)
-  # registerDoParallel(cores=2)
-  # fastvarImp(object = iris.cf, measure='ACC')
-  # stopImplicitCluster()
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

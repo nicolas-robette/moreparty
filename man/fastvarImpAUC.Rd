@@ -46,7 +46,13 @@
   For using the original AUC definition and multiclass AUC you can use the \code{fastvarImp} function and specify the particular measure.
   The code is adapted from \code{varImpAUC} function in \code{varImp} package.
 }
-
+\references{
+Janitza, S., Strobl, C. & Boulesteix, A.-L. An AUC-based permutation variable
+importance measure for random forests. \emph{BMC Bioinform.} 14, 119 (2013).
+}
+\author{
+Nicolas Robette
+}
 \seealso{
 \code{varImpAUC}, \code{fastvarImp}, \code{cforest}, \code{fastcforest}
 }
@@ -57,18 +63,6 @@
   iris.cf = party::cforest(Species ~ ., data = iris2,
             control = party::cforest_unbiased(mtry = 2, ntree = 50))
   fastvarImpAUC(object = iris.cf, parallel = FALSE)
-  # For parallelized version :
-  # library(doParallel)
-  # registerDoParallel(cores=2)
-  # fastvarImpAUC(object = iris.cf)
-  # stopImplicitCluster()
-}
-\references{
-Janitza, S., Strobl, C. & Boulesteix, A.-L. An AUC-based permutation variable
-importance measure for random forests. \emph{BMC Bioinform.} 14, 119 (2013).
-}
-\author{
-Nicolas Robette
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

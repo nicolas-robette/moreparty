@@ -9,7 +9,7 @@ GetAleData <- function(object, xnames=NULL, order=1, grid.size=20, parallel=FALS
     pred.fun <- function(model, newdata) { do.call('rbind',predict(model,newdata=newdata,type='prob'))[,2] }
   }
   if(CLASS==FALSE) {
-    pred.fun <- function(model,newdata) { predict(object)[,1] }
+    pred.fun <- function(model,newdata) { predict(model,newdata=newdata)[,1] }
   }
   input = object@data@get("input")
   if(order==2 & length(xnames)!=2) stop("for 2nd order ALE, xnames should be of length 2")

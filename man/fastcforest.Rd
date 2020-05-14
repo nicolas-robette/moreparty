@@ -92,11 +92,6 @@ Nicolas Robette
   iris2 = iris
   iris2$Species = factor(iris$Species=="versicolor")
   iris.cf = fastcforest(Species~., data=iris2, parallel=FALSE)
-  # for the parallelized version :
-  # library(doParallel)
-  # registerDoParallel(cores=2)
-  # iris.cf = fastcforest(Species~., data=iris2, parallel=TRUE)
-  # stopImplicitCluster()
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

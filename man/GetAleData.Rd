@@ -24,7 +24,7 @@ The computation of Accumulated Local Effects uses \code{\link{FeatureEffect}} fu
 }
 
 \value{
-A data frame with covariates values and accumulated local effects.
+A data frame with covariates, their categories and their accumulated local effects.
 }
 
 \references{

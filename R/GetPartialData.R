@@ -21,5 +21,6 @@ GetPartialData <- function(object, xnames=NULL, ice = FALSE, center = FALSE,
   pdep <- do.call('rbind.data.frame', pdep)
   names(pdep)[2] <- 'value'
   pdep$var <- factor(pdep$var)
+  pdep <- pdep[,c('var','cat','value')]
   return(pdep)
 }

@@ -60,7 +60,7 @@ List containing additional options to be passed onto \code{\link{foreach}} when 
 The computation of partial dependence uses \code{\link{partial}} function from \code{\link{pdp}} package for each covariate. The results are then gathered and reshaped into a friendly data frame format.}
 
 \value{
-A data frame with covariates values and partial dependence effects.
+A data frame with covariates, their categories and their partial dependence effects.
 }
 
 \references{

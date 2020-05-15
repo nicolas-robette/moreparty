@@ -4,8 +4,10 @@
 
 ggForestEffects <- function(dt, vline=0, xlabel="", ylabel="", main="") {
 
-  names(dt)[which(sapply(dt, is.numeric))] <- "value"
-    
+  # names(dt)[which(sapply(dt, is.numeric))] <- "value"
+  
+  if(sum(duplicated(dt$cat))>0) stop("There should be no duplicated categories.")
+  
   p <- ggplot2::ggplot(dt, ggplot2::aes(x = .data$value, y = factor(.data$cat,levels=.data$cat), color = .data$var)) + 
          ggplot2::geom_point(shape = 16) + 
          ggplot2::facet_grid(.data$var ~ ., scales = "free_y", space = "free_y") + 

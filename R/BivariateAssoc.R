@@ -38,7 +38,7 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
     res[[i]] <- data.frame(mesure,assoc,stringsAsFactors = F)
   }
   res <- do.call('rbind.data.frame',res)
-  restot <- data.frame(variable=xnames,p.value=round(p.value,5),criterion=criterion,measure=res$mesure,assoc=round(res$assoc,3))
+  restot <- data.frame(variable=xnames,measure=res$mesure,assoc=round(res$assoc,3),p.value=round(p.value,5),criterion=criterion)
   restot <- restot[order(restot$criterion, decreasing=F),]
   restot$criterion <- round(restot$criterion,10)
   rownames(restot) <- NULL
@@ -77,7 +77,7 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
     }
     res <- do.call('rbind.data.frame',res)
     noms <- do.call('rbind.data.frame',combi)
-    restot2 <- data.frame(variable1=noms[,1],variable2=noms[,2],p.value=round(res$p.value,5),criterion=res$criterion,measure=res$mesure,assoc=round(res$assoc,3),row.names=NULL)
+    restot2 <- data.frame(variable1=noms[,1],variable2=noms[,2],measure=res$mesure,assoc=round(res$assoc,3),p.value=round(res$p.value,5),criterion=res$criterion,row.names=NULL)
     restot2 <- restot2[order(restot2$criterion, decreasing=F),]
     restot2$criterion <- round(restot2$criterion,10)
     rownames(restot2) <- NULL

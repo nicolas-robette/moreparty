@@ -27,10 +27,10 @@ A list of the following items :
 \item{YX}{: a table with the association measures between the response and predictor variables}
 \item{XX}{: a table with the association measures between every couples of predictor variables}
 In each table :
-\item{p.value}{: p-value from the permutation test}
-\item{criterion}{: p-value from the permutation test transformed as -log(1-p), which serves to sort rows}
 \item{measure}{: name of the "standard" association measure}
 \item{assoc}{: value of the "standard" association measure}
+\item{p.value}{: p-value from the permutation test}
+\item{criterion}{: p-value from the permutation test transformed as -log(1-p), which serves to sort rows}
 }
 
 \references{

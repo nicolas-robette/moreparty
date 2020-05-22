@@ -1,10 +1,10 @@
-#' @import party
+# @import partykit
 #'
 #' @importFrom stats predict lm
 
 #' @export
 
-SurrogateTree <- function(object, mincriterion = 0.95, maxdepth=0) {
+SurrogateTree <- function(object, mincriterion = 0.95, maxdepth=3) {
   response = object@responses
   CLASS = all(response@is_nominal | response@is_ordinal)
   if(CLASS==TRUE) {
@@ -14,14 +14,14 @@ SurrogateTree <- function(object, mincriterion = 0.95, maxdepth=0) {
   if(CLASS==FALSE) pred <- predict(object)[,1]
   input = object@data@get("input")
   dt_surro <- data.frame(yhat=pred, input)
-  ctree_surro <- party::ctree(yhat~., dt_surro, control=party::ctree_control(mincriterion=mincriterion, maxdepth=maxdepth))
-  pred_surro <- predict(ctree_surro)[,1]
+  ctree_surro <- partykit::ctree(yhat~., dt_surro, control=partykit::ctree_control(mincriterion=mincriterion, maxdepth=maxdepth))
+  pred_surro <- predict(ctree_surro) #[,1]
   r.squared <- summary(lm(pred~pred_surro))$r.squared
   return(list(tree=ctree_surro, r.squared=r.squared))
 }
 
 
-#
+# object=iris.cf
 # data(iris)
 # iris2 = iris
 # iris2$Species = factor(iris$Species == "versicolor")

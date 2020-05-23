@@ -10,7 +10,7 @@ A dataset describing the passengers of the Titanic and their survival
 \usage{data("titanic")}
 
 \format{
-  A data frame with 891 observations and the following 5 variables.
+  A data frame with 1309 observations and the following 5 variables.
   \describe{
     \item{\code{Survived}}{Factor. Whether one survived or not}
     \item{\code{Pclass}}{Factor. Passenger class}
@@ -22,7 +22,7 @@ A dataset describing the passengers of the Titanic and their survival
 
 \examples{
 data(titanic)
-## maybe str(titanic) ; plot(titanic) ...
+str(titanic)
 }
 
 \keyword{datasets}

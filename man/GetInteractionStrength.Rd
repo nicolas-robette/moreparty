@@ -36,7 +36,7 @@ Greenwell, B. M., Boehmke, B. C., and McCarthy, A. J.: A Simple and Effective Mo
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species == "versicolor")
-  iris.cf = party::cforest(Species ~ ., data = iris2, controls = party::cforest_unbiased(mtry=2))
+  iris.cf = party::cforest(Species ~ ., data = iris2, controls = party::cforest_unbiased(mtry=2, ntree=50))
   GetInteractionStrength(iris.cf)
 }
 

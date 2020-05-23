@@ -10,7 +10,7 @@ GetPartialData <- function(object, xnames=NULL, ice = FALSE, center = FALSE,
   if(is.null(xnames)) xnames = colnames(input)
   pdep <- lapply(xnames, function(x) pdp::partial(object, x, pred.fun = pred.fun,
                                                   grid.resolution = grid.resolution, ice = ice, center = center,
-                                                  quantiles = quantiles, probs = 1:9/10, trim.outliers = trim.outliers,
+                                                  quantiles = quantiles, probs = probs, trim.outliers = trim.outliers,
                                                   which.class = which.class, prob = prob,
                                                   parallel = parallel, paropts = paropts))
   for(i in 1:length(pdep)) {

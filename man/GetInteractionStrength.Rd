@@ -33,11 +33,14 @@ Greenwell, B. M., Boehmke, B. C., and McCarthy, A. J.: A Simple and Effective Mo
 }
 
 \examples{
+  \dontrun{
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species == "versicolor")
-  iris.cf = party::cforest(Species ~ ., data = iris2, controls = party::cforest_unbiased(mtry=2, ntree=50))
+  iris.cf = party::cforest(Species ~ ., data = iris2, 
+              controls = party::cforest_unbiased(mtry=2, ntree=50))
   GetInteractionStrength(iris.cf)
+  }
 }
 
 \keyword{tree}

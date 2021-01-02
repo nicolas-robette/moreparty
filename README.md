@@ -1,19 +1,16 @@
-**moreparty**
-=============
+# **moreparty** <img src="man/figures/moreparty.png" height=140px width=120px alt="" align="right" />
 
+## Tools for conditional inference random forests
 
-Tools for conditional inference random forests
-----------------------------------------------
-
-<!-- badges: start -->
+  <!-- badges: start -->
   [![R build status](https://github.com/nicolas-robette/moreparty/workflows/R-CMD-check/badge.svg)](https://github.com/nicolas-robette/moreparty/actions)
   [![](https://www.r-pkg.org/badges/version/moreparty?color=blue)](https://cran.r-project.org/package=moreparty)
   [![](http://cranlogs.r-pkg.org/badges/last-month/moreparty?color=orange)](https://cran.r-project.org/package=moreparty)
-    <!-- badges: end -->
+  [![CodeFactor](https://www.codefactor.io/repository/github/nicolas-robette/moreparty/badge)](https://www.codefactor.io/repository/github/nicolas-robette/moreparty)
 
-This package aims at complementing the
-[`party`](https://cran.r-project.org/package=party) package with
-parallelization and interpretation tools.
+  <!-- badges: end -->
+
+This package aims at complementing the [`party`](https://cran.r-project.org/package=party) package with parallelization and interpretation tools.
 
 It provides functions for :
 
@@ -31,8 +28,7 @@ It provides functions for :
 -   dot plots for variable importance and effects
 
 
-Installation
-------------
+## Installation
 
 Execute the following code within `R`:
 
@@ -44,8 +40,7 @@ if (!require(devtools)){
 install_github("nicolas-robette/moreparty")
 ```
 
-References
-----------
+## References
 
 Altmann A., Toloşi L., Sander O., and Lengauer T. “Permutation importance: a corrected feature importance measure”. *Bioinformatics*, 26(10):1340-1347, 2010.
 

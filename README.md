@@ -5,6 +5,12 @@
 Tools for conditional inference random forests
 ----------------------------------------------
 
+<!-- badges: start -->
+  [![R build status](https://github.com/nicolas-robette/moreparty/workflows/R-CMD-check/badge.svg)](https://github.com/nicolas-robette/moreparty/actions)
+  [![](https://www.r-pkg.org/badges/version/moreparty?color=blue)](https://cran.r-project.org/package=moreparty)
+  [![](http://cranlogs.r-pkg.org/badges/last-month/moreparty?color=orange)](https://cran.r-project.org/package=moreparty)
+    <!-- badges: end -->
+
 This package aims at complementing the
 [`party`](https://cran.r-project.org/package=party) package with
 parallelization and interpretation tools.

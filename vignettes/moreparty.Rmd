@@ -1,0 +1,68 @@
+## Introduction to moreparty
+
+To begin with, let’s create a binary classification problem from the `iris` data set.
+
+```{r}
+iris2 = iris
+iris2$Species = factor(iris$Species=="versicolor")
+```
+
+Now we can fit a conditional forest to the data. We use [`doParallel`](https://cran.r-project.org/package=doParallel) package
+for parallelization, here with 2 cores. The syntax of `fastcforest` function is exactly the same as `cforest` from
+[`party`](https://cran.r-project.org/package=party) package, with an additional option for parallelization.
+
+```{r, message=FALSE, warning=FALSE}
+set.seed(123)
+
+library(moreparty)
+library(doParallel)
+
+registerDoParallel(cores=2)
+iris.cf = fastcforest(Species~., data=iris2, parallel=TRUE)
+stopImplicitCluster()
+```
+
+------------------------------------------------------------------------
+
+### variable importance
+
+We may now compute the variable importances.
+
+```{r}
+registerDoParallel(cores=2)
+vi = fastvarImp(iris.cf, measure='ACC', parallel=TRUE)
+stopImplicitCluster()
+rev(sort(vi))
+```
+
+Petal width and sepal width seem notably more important than the other two variables.
+
+------------------------------------------------------------------------
+
+### surrogate trees
+
+A surrogate tree is a simple tree that tries to approximate a more complex (and less interpretable) model, such as random forests.
+
+```{r}
+surro = SurrogateTree(iris.cf)
+surro$r.squared
+```
+
+```{r}
+plot(surro$tree)
+```
+
+This surrogate tree approximates our forest’s predictions, but in a far from perfect way (R2 = 0.82), so it should probably be interpreted cautiously.
+
+------------------------------------------------------------------------
+
+### prototypes
+
+Prototypes are ‘representative’ cases of a group of data points, here versicolor vs non versicolor species, according the proximity matrix derived from the forest.
+
+```{r}
+prox = proximity(iris.cf)
+Prototypes(iris2$Species, iris2[,1:4], prox, nProto=3)
+```
+
+The prototypes of versicolor species all have sepal length about 5, sepal width about 3, petal length about 4.5 and petal width about 1.4. The prototypes of non versicolor species are more heterogeneous, in particular in terms of petal length and width.

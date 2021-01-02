@@ -62,7 +62,7 @@ data(titanic)
 str(titanic)
 ```
 
-We have 1309 cases, one categorical explanained variable, `Survived`, which codes whether or not an individual survived the shipwreck, and four explanatory variables (three categorical and one continuous): gender, age, passenger class, and port of embarkation. The distribution of the variables is examined.
+We have 1309 cases, one categorical explained variable, `Survived`, which codes whether or not an individual survived the shipwreck, and four explanatory variables (three categorical and one continuous): gender, age, passenger class, and port of embarkation. The distribution of the variables is examined.
 
 ```{r desc_tita}
 summary(titanic)
@@ -122,7 +122,7 @@ The graphical representation can be parameterized to obtain a simpler and more r
 plot(arbre, inner_panel=node_inner(arbre,id=FALSE,pval=FALSE), terminal_panel=node_barplot(arbre,id=FALSE), gp=gpar(cex=0.6), ep_args=list(justmin=15))
 ```
 
-Note that the [`ggparty`](https://cran.r-project.org/package=ggparty) package  graphically represents Ctree trees with the `ggplot2` grammar.
+Note that the [`ggparty`](https://cran.r-project.org/package=ggparty) package graphically represents Ctree trees with the `ggplot2` grammar.
 
 To measure the performance of the tree, the AUC is calculated, by comparing predicted and observed survival.
 
@@ -226,7 +226,7 @@ To go further in the interpretation of the results, permutation variable importa
 importance <- -varImpAUC(foret)
 importance %>% round(3)
 
-ggVarImp(importance)
+ggVarImp(-importance)
 ```
 
 `Sex` is the most important variable, ahead of `Pclass`, `Age` and `Embarked` (whose importance is close to zero).

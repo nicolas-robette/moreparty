@@ -1,8 +1,7 @@
 Package: moreparty
 Type: Package
 Title: A Toolbox for Conditional Inference Random Forests
-Version: 0.2.0
-Date: 2020-05-31
+Version: 0.2.1
 Depends: R (>= 3.1.0), party
 Imports: partykit, varImp, plyr, foreach, measures, methods, MASS, iml, pdp, vip, ggplot2, rlang
 Suggests: doParallel, knitr, rmarkdown, rmdformats, GDAtools, RColorBrewer, caret, pROC, tidyverse, e1071
@@ -13,4 +12,4 @@ Description: Additions to 'party' package : tools for the interpretation of fore
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1

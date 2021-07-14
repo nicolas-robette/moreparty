@@ -79,7 +79,7 @@ BivariateAssoc(titanic$Survived, titanic[,-1])
 Survival is primarily associated with gender, secondarily with the passenger class. The explanatory variables are weakly related to each other.
 
 ```{r catdesc}
-catdesc(titanic$Survived, titanic[,-1], min.phi=0.1)
+catdesc(titanic$Survived, titanic[,-1], min.phi=0.1, robust=FALSE)
 ```
 
 Women, first class passengers and those who boarded at Cherbourg are over-represented among the survivors. Men, 3rd class passengers and those who boarded at Southampton are over-represented among the non-survivors.
@@ -451,12 +451,14 @@ The algorithm suggests to keep the set of variables, or to eliminate `Age` and `
 
 [`moreparty`](https://cran.r-project.org/package=moreparty) package provides parallelized versions of `cforest`, `varImp` and `varImpAUC` functions, to save computation time. For example, to parallelize the computation of variable importance :
 
-```{r parallel, results='hold'}
+```{r parallel, eval=FALSE}
 library(doParallel)
 registerDoParallel(cores=2)
 fastvarImpAUC(foret)
 stopImplicitCluster()
 ```
+
+This chunk of code works fine with Linux but may have to be adapted for other OS.
 
 Parallelization is also an option for many of the functions we have used here.
 

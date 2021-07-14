@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -42,9 +42,6 @@
     <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li>
-  <a href="../articles/moreparty.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -81,7 +78,7 @@
       <h1 data-toc-skip>[en] An example of recursive partitioning with Titanic data</h1>
                         <h4 class="author">Nicolas Robette</h4>
             
-            <h4 class="date">2021-01-02</h4>
+            <h4 class="date">2021-07-14</h4>
       
       
       <div class="hidden name"><code>Titanic_example.Rmd</code></div>
@@ -95,7 +92,7 @@
 <a href="#first-steps" class="anchor"></a>First steps</h2>
 <p>First, the necessary packages are loaded into memory.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>  <span class="co"># data management</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>  <span class="co"># data management</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span>  <span class="co"># confusion matrix</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://party.R-forge.R-project.org">party</a></span><span class="op">)</span>  <span class="co"># conditional inference random forests and trees</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://partykit.r-forge.r-project.org/partykit/">partykit</a></span><span class="op">)</span>  <span class="co"># conditional inference trees</span>
@@ -106,12 +103,12 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/koalaverse/vip/">vip</a></span><span class="op">)</span>  <span class="co"># measure of interactions</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">moreparty</span><span class="op">)</span>  <span class="co"># surrogate trees, accumulated local effects, etc.</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>  <span class="co"># color palettes</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://nicolas.robette.free.fr/outils_eng.html">GDAtools</a></span><span class="op">)</span>  <span class="co"># bivariate analysis</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nicolas-robette/GDAtools">GDAtools</a></span><span class="op">)</span>  <span class="co"># bivariate analysis</span></code></pre></div>
 <p>Now, we then import <code>titanic</code> data set from <a href="https://cran.r-project.org/package=moreparty"><code>moreparty</code></a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">)</span></code></pre></div>
-<pre><code>tibble [1,309 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+<pre><code>spec_tbl_df [1,309 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ Survived: Factor w/ 2 levels "No","Yes": 2 2 1 1 1 2 2 1 2 1 ...
  $ Sex     : Factor w/ 2 levels "female","male": 1 2 1 2 1 2 1 2 1 2 ...
  $ Pclass  : Factor w/ 3 levels "1st","2nd","3rd": 1 1 1 1 1 1 1 1 1 1 ...
@@ -149,47 +146,57 @@ $XX
 6       Sex       Age    eta2 0.003 0.03964 0.0404512887</code></pre>
 <p>Survival is primarily associated with gender, secondarily with the passenger class. The explanatory variables are weakly related to each other.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/GDAtools/man/catdesc.html">catdesc</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, min.phi<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://nicolas-robette.github.io/GDAtools//reference/catdesc.html">catdesc</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, min.phi<span class="op">=</span><span class="fl">0.1</span>, robust<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <pre><code>$variables
-  variable measure assoc p.value   criterion
-1      Sex  cramer 0.527 0.00000 0.000000000
-2   Pclass  cramer 0.313 0.00000 0.000000000
-3 Embarked  cramer 0.184 0.00000 0.000000001
-4      Age    eta2 0.002 0.26069 0.302040642
+  variable    measure association permutation.pvalue
+1      Sex Cramer's V       0.529                 NA
+2   Pclass Cramer's V       0.313                 NA
+3 Embarked Cramer's V       0.184                 NA
+4      Age       Eta2       0.003                 NA
 
 $bylevel
 $bylevel$No
 $bylevel$No$categories
-            categories pct.ycat.in.xcat pct.xcat.in.ycat pct.xcat.global    phi
-2             Sex.male            0.809            0.843           0.644  0.527
-5           Pclass.3rd            0.745            0.653           0.542  0.282
-8 Embarked.Southampton            0.667            0.754           0.699  0.150
-6   Embarked.Cherbourg            0.444            0.148           0.207 -0.181
-3           Pclass.1st            0.381            0.152           0.247 -0.278
-1           Sex.female            0.273            0.157           0.356 -0.527
+             categories pct.ycat.in.xcat pct.xcat.in.ycat pct.xcat.global
+2              Sex.male            0.809            0.843           0.644
+3            Pclass.3rd            0.745            0.653           0.542
+6  Embarked.Southampton            0.667            0.754           0.699
+8    Embarked.Cherbourg            0.444            0.148           0.207
+9            Pclass.1st            0.381            0.152           0.247
+11           Sex.female            0.273            0.157           0.356
+      phi
+2   0.529
+3   0.283
+6   0.152
+8  -0.183
+9  -0.279
+11 -0.529
 
 $bylevel$No$continuous.var
-  variables median.x.in.ycat median.x.global sd.x.in.ycat sd.x.global
-1       Age               28              28     13.92254     14.4135
-   corr.coef
-1 0.05551252
+  variables mean.x.in.ycat mean.x.global sd.x.in.ycat sd.x.global   cor
+1       Age             NA            NA           NA          NA 0.056
 
 
 $bylevel$Yes
 $bylevel$Yes$categories
-            categories pct.ycat.in.xcat pct.xcat.in.ycat pct.xcat.global    phi
-1           Sex.female            0.727            0.678           0.356  0.527
-3           Pclass.1st            0.619            0.400           0.247  0.278
-6   Embarked.Cherbourg            0.556            0.301           0.207  0.181
-8 Embarked.Southampton            0.333            0.610           0.699 -0.150
-5           Pclass.3rd            0.255            0.362           0.542 -0.282
-2             Sex.male            0.191            0.322           0.644 -0.527
+             categories pct.ycat.in.xcat pct.xcat.in.ycat pct.xcat.global
+1            Sex.female            0.727            0.678           0.356
+4            Pclass.1st            0.619            0.400           0.247
+5    Embarked.Cherbourg            0.556            0.301           0.207
+7  Embarked.Southampton            0.333            0.610           0.699
+10           Pclass.3rd            0.255            0.362           0.542
+12             Sex.male            0.191            0.322           0.644
+      phi
+1   0.529
+4   0.279
+5   0.183
+7  -0.152
+10 -0.283
+12 -0.529
 
 $bylevel$Yes$continuous.var
-  variables median.x.in.ycat median.x.global sd.x.in.ycat sd.x.global
-1       Age               28              28     15.06148     14.4135
-    corr.coef
-1 -0.05551252</code></pre>
+  variables mean.x.in.ycat mean.x.global sd.x.in.ycat sd.x.global    cor
+2       Age             NA            NA           NA          NA -0.056</code></pre>
 <p>Women, first class passengers and those who boarded at Cherbourg are over-represented among the survivors. Men, 3rd class passengers and those who boarded at Southampton are over-represented among the non-survivors.</p>
 <p>Random forests imply a share of randomness (via resampling and drawing of splitting variables), as well as some interpretation tools (via variable permutations). From one program run to the next, the results may therefore differ slightly. If you wish to obtain the same results systematically and to ensure reproducibility, use the <code>set.seed</code> function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -695,8 +702,7 @@ $Yes
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span><span class="op">(</span>cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="../reference/fastvarImpAUC.html">fastvarImpAUC</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">stopImplicitCluster</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>       Sex     Pclass        Age   Embarked 
-0.23506888 0.07458054 0.02946953 0.01006269 </code></pre>
+<p>This chunk of code works fine with Linux but may have to be adapted for other OS.</p>
 <p>Parallelization is also an option for many of the functions we have used here.</p>
 </div>
   </div>

@@ -38,7 +38,7 @@ see also https://stats.stackexchange.com/questions/171301/interpreting-ctree-par
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species == "versicolor")
-  iris.ct = party::ctree(Species ~ ., data = iris2)
+  iris.ct = partykit::ctree(Species ~ ., data = iris2)
   GetSplitStats(iris.ct)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

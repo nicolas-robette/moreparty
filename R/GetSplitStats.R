@@ -2,10 +2,10 @@
 
 GetSplitStats <- function(ct) {
   if(class(ct)[1]=='BinaryTree') {
-    ternodes <- unique(where(ct))
+    ternodes <- unique(party::where(ct))
     allnodes <- 1:max(ternodes)
     splnodes <- setdiff(allnodes,ternodes)
-    stats <- lapply(splnodes, function(x) round(rev(sort(log(nodes(ct,x)[[1]]$criterion$criterion))),10))
+    stats <- lapply(splnodes, function(x) round(rev(sort(log(party::nodes(ct,x)[[1]]$criterion$criterion))),10))
     names(stats) <- splnodes
   }
   if(class(ct)[1]=='constparty') {
@@ -13,6 +13,12 @@ GetSplitStats <- function(ct) {
     ternodes <- partykit::nodeids(ct, terminal = TRUE)
     splnodes <- setdiff(allnodes,ternodes)
     stats <- partykit::nodeapply(ct, ids = splnodes, FUN = function(x) partykit::info_node(x)$criterion)
+    for(i in 1:length(stats)) {
+      z <- as.data.frame(t(stats[[i]]))
+      z <- z[order(-z$criterion),]
+      z$ratio <- z$criterion/max(z$criterion)
+      stats[[i]] <- z
+    }
   }
   return(stats)
 }

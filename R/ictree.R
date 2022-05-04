@@ -32,7 +32,7 @@ ictree <- function(treedata = NULL) {
         
         tabPanel(
           title = "Trees",
-          ctreeUI(id = "interactive_tree")
+          moreparty::ctreeUI(id = "interactive_tree")
         )
         
       ),
@@ -96,7 +96,9 @@ ictree <- function(treedata = NULL) {
           res_filter$code()
         })
         
-        ctreeServer(id = "interactive_tree", reactive(dt_tree$data))
+        moreparty::ctreeServer(id = "interactive_tree",
+                               reactive(dt_tree$data),
+                               reactive(dt_tree$name))
         
       }
   )}

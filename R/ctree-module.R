@@ -170,6 +170,8 @@ ctreeUI <- function(id) {
 
 # module SERVER ----
 
+#' @export
+
 ctreeServer <- function(id, data, name) {
   
   stopifnot(is.reactive(data))

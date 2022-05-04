@@ -1,12 +1,27 @@
+# moreparty 0.3
+
+## New functions:
+
+* `NiceTreePlot()`: plots conditional inference trees
+* `EasyTreeVarImp()`: variable importance for conditional inference trees
+* `ctreeUI()` and `ctreeServer()`: shiny module to build and analyse conditional inference trees
+* `ictree()`: interactive (shiny) app for conditional inference trees
+ 
+## Changes in existing functions:
+
+* `GetSplitStats()` : results have been rearranged and a 'ratio' column has been added
+
+
+
 # moreparty 0.2
 
 ## New functions:
 
-* GetInteractionData(): measures second order interactions between the covariates of a random forest
-* GetPartialData(): computes partial dependencies of the covariates of a random forest
-* ggForestEffects(): plots the effects of the covariates of a random forest in a ggplot dot plot
-* ggVarImp(): plots variable importances of the covariates of a random forest in a ggplot dot plot
+* `GetInteractionData()`: measures second order interactions between the covariates of a random forest
+* `GetPartialData()`: computes partial dependencies of the covariates of a random forest
+* `ggForestEffects()`: plots the effects of the covariates of a random forest in a ggplot dot plot
+* `ggVarImp()`: plots variable importances of the covariates of a random forest in a ggplot dot plot
 
 ## Changes in existing functions:
 
-* GetAleData(): bug fix for regression tasks
+* `GetAleData()`: bug fix for regression tasks

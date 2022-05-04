@@ -1,14 +1,14 @@
 Package: moreparty
 Type: Package
 Title: A Toolbox for Conditional Inference Random Forests
-Version: 0.2.1
+Version: 0.3
 Depends: R (>= 3.5.0), party
-Imports: partykit, varImp, plyr, foreach, measures, methods, MASS, iml, pdp, vip, ggplot2, rlang
+Imports: partykit, varImp, plyr, foreach, measures, methods, MASS, iml, pdp, vip, ggplot2, rlang, shiny, shinyWidgets, rclipboard, DT, datamods
 Suggests: doParallel, knitr, rmarkdown, rmdformats, GDAtools, RColorBrewer, caret, pROC, tidyverse, e1071
 VignetteBuilder: knitr
 Author: Nicolas Robette
 Maintainer: Nicolas Robette <nicolas.robette@uvsq.fr>
-Description: Additions to 'party' package : tools for the interpretation of forests (surrogate trees, prototypes, etc.), feature selection (see Gregorutti et al (2017) <arXiv:1310.5726>, Hapfelmeier and Ulm (2013) <doi:10.1016/j.csda.2012.09.020>, Altmann et al (2010) <doi:10.1093/bioinformatics/btq134>) and parallelized versions of conditional forest and variable importance functions.
+Description: Additions to 'party' and 'partykit' packages : tools for the interpretation of forests (surrogate trees, prototypes, etc.), feature selection (see Gregorutti et al (2017) <arXiv:1310.5726>, Hapfelmeier and Ulm (2013) <doi:10.1016/j.csda.2012.09.020>, Altmann et al (2010) <doi:10.1093/bioinformatics/btq134>) and parallelized versions of conditional forest and variable importance functions. Also modules and a shiny app for conditional inference trees.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true

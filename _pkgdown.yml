@@ -27,9 +27,16 @@ reference:
   - ggForestEffects
   - ggVarImp
 
+- title: Trees
+- contents:
+  - EasyTreeVarImp
+  - GetSplitStats
+  - NiceTreePlot
+  - ctree-module
+  - ictree
+
 - title: Miscellaneous
 - contents:
   - GetCtree
-  - GetSplitStats
   - FeatureSelection
   - BivariateAssoc

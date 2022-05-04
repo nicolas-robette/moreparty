@@ -15,7 +15,19 @@ ictree <- function(treedata = NULL) {
         id = "navbar",
         
         tabPanel(
-          title = "Filter", 
+          title = "Import",
+          value = "Import",
+          fluidRow(
+            datamods::import_ui(
+                  id = "import-data",
+                  from = c("env", "file", "copypaste", "url")
+                )
+          )
+        ),
+        
+        tabPanel(
+          title = "Filter",
+          value = "Filter",
           fluidRow(
             column(
               width = 3,
@@ -32,6 +44,7 @@ ictree <- function(treedata = NULL) {
         
         tabPanel(
           title = "Trees",
+          value = "Trees",
           moreparty::ctreeUI(id = "interactive_tree")
         )
         
@@ -44,17 +57,12 @@ ictree <- function(treedata = NULL) {
         ns <- session$ns
         
         rv <- reactiveValues(
-          data = treedata,
+          data = as.data.frame(treedata),
           name = treedata_name
         )
         
-        # Launch import modal if no data at start
-        if (is.null(isolate(rv$data))) {
-          datamods::import_modal(
-            id = ns("import-data"),
-            from = c("env", "file", "copypaste", "url"),
-            title = "Import data"
-          )
+        if (nrow(isolate(rv$data))>0) {
+          updateNavbarPage(inputId = "navbar", selected = "Filter")
         }
         
         data_imported <- datamods::import_server("import-data", return_class = "tbl_df")

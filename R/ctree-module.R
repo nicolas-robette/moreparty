@@ -110,7 +110,9 @@ ctreeUI <- function(id) {
       ),
       
       tabsetPanel(id = ns("tabs"),
-                  tabPanel("Plot", value = 1,
+                  tabPanel(tagList(phosphoricons::ph("tree", title = "Plot"),
+                                   "Plot"),
+                           value = 1,
                            fluidPage(br(),
                                      conditionalPanel(
                                        ns = ns,
@@ -122,7 +124,9 @@ ctreeUI <- function(id) {
                            )
                   ),
                   
-                  tabPanel("Statistics", value = 2,
+                  tabPanel(tagList(phosphoricons::ph("gauge", title = "Statistics"),
+                                   "Statistics"),
+                           value = 2,
                            fluidPage(h3("Performance of the model"),
                                      verbatimTextOutput(ns("perfPrint")),
                                      br(),
@@ -133,7 +137,9 @@ ctreeUI <- function(id) {
                                      br()
                            )),
                   
-                  tabPanel("Stability", value = 3,
+                  tabPanel(tagList(phosphoricons::ph("anchor", title = "Stability"),
+                                   "Stability"),
+                           value = 3,
                            fluidPage(h3("Tree as text"),
                                      verbatimTextOutput(ns("texttreePrint")),
                                      br(),
@@ -142,7 +148,9 @@ ctreeUI <- function(id) {
                                      br()
                            )),
                   
-                  tabPanel("R code", value = 4,
+                  tabPanel(tagList(phosphoricons::ph("code", title = "R code"),
+                                   "R code"),
+                           value = 4,
                            fluidPage(rclipboardSetup(),
                                      verbatimTextOutput(ns("codePrint")),
                                      # UI ouputs for the copy-to-clipboard buttons

@@ -1,6 +1,6 @@
 #' @export
 
-#' @importFrom shiny column fluidRow isolate navbarPage observeEvent reactiveValues shinyApp
+#' @importFrom shiny column fluidRow isolate navbarPage observeEvent reactiveValues shinyApp updateNavbarPage
 
 
 ictree <- function(treedata = NULL) {

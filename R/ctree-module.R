@@ -1,9 +1,10 @@
 #' @export
 
-#' @importFrom shiny HTML NS br conditionalPanel downloadButton downloadHandler fluidPage h3 hr icon is.reactive mainPanel moduleServer need observe plotOutput reactive renderPlot renderPrint renderText renderUI req selectInput showNotification sidebarLayout sidebarPanel sliderInput tabPanel tabsetPanel tags textOutput uiOutput updateSelectInput validate verbatimTextOutput
+#' @importFrom shiny tagList HTML NS br conditionalPanel downloadButton downloadHandler fluidPage h3 hr icon is.reactive mainPanel moduleServer need observe plotOutput reactive renderPlot renderPrint renderText renderUI req selectInput showNotification sidebarLayout sidebarPanel sliderInput tabPanel tabsetPanel tags textOutput uiOutput updateSelectInput validate verbatimTextOutput
 #' @importFrom DT DTOutput renderDT
 #' @importFrom shinyWidgets materialSwitch
 #' @importFrom rclipboard rclipButton rclipboardSetup
+#' @importFrom phosphoricons ph
 
 
 # module UI ----

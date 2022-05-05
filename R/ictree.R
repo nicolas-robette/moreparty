@@ -5,7 +5,19 @@
 
 ictree <- function(treedata = NULL) {
   
-  treedata_name <- deparse(substitute(treedata))
+  rv <- reactiveValues(
+    data = NULL,
+    name = NULL
+  )
+  
+  if(is.null(treedata)) {
+    treedata_name <- ""
+  } else {
+    treedata_name <- deparse(substitute(treedata))
+  }
+
+  rv$data <- treedata
+  rv$name <- treedata_name
   
   shinyApp(
     
@@ -56,12 +68,7 @@ ictree <- function(treedata = NULL) {
         
         ns <- session$ns
         
-        rv <- reactiveValues(
-          data = as.data.frame(treedata),
-          name = treedata_name
-        )
-        
-        if (nrow(isolate(rv$data))>0) {
+        if (!is.null(isolate(rv$data))) {
           updateNavbarPage(inputId = "navbar", selected = "Filter")
         }
         
@@ -90,7 +97,7 @@ ictree <- function(treedata = NULL) {
         observeEvent(rv$data, {
           dt_tree$data = rv$data
           dt_tree$name = rv$name
-        })
+        }, ignoreInit = FALSE)
         
         observeEvent(res_filter$filtered(), {
           dt_tree$data = res_filter$filtered()
@@ -104,9 +111,11 @@ ictree <- function(treedata = NULL) {
           res_filter$code()
         })
         
-        moreparty::ctreeServer(id = "interactive_tree",
-                               reactive(dt_tree$data),
-                               reactive(dt_tree$name))
+        observeEvent(dt_tree$data, {
+          moreparty::ctreeServer(id = "interactive_tree",
+                                 data = reactive(as.data.frame(dt_tree$data)),
+                                 name = reactive(dt_tree$name))
+        })
         
       }
   )}

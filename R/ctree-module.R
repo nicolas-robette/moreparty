@@ -119,14 +119,6 @@ ctreeUI <- function(id) {
                                      ),
                                      # br(),
                                      plotOutput(ns("treePlot"), height="600px", width="100%")
-                                     # br(),
-                                     # fluidRow(
-                                     #   column(9),
-                                     #   column(3,
-                                     #          downloadButton(ns('downloadPlot'), 'Save')
-                                     #   )
-                                     # ),
-                                     # br()
                            )
                   ),
                   
@@ -175,6 +167,7 @@ ctreeUI <- function(id) {
 ctreeServer <- function(id, data, name) {
   
   stopifnot(is.reactive(data))
+  stopifnot(is.reactive(name))
   
   moduleServer(id, function(input, output, session) {
     

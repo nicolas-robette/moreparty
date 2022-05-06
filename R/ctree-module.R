@@ -103,12 +103,10 @@ ctreeUI <- function(id) {
     mainPanel(
       
       tags$head(
-        tags$style(HTML("
-      .shiny-output-error-validation {
-        color: orange;
-      }
-    "))
+        tags$style(HTML(".shiny-output-error-validation {color: orange;}"))
       ),
+      
+      tags$style(HTML(".tabbable > .nav > li > a {width: 15vw;}")),
       
       tabsetPanel(id = ns("tabs"),
                   tabPanel(tagList(phosphoricons::ph("tree", title = "Plot"),

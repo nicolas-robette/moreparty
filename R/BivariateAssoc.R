@@ -2,6 +2,7 @@
 
 #' @export
 
+
 BivariateAssoc <- function(Y,X,xx=TRUE) {
 
   X <- as.data.frame(X)
@@ -22,15 +23,15 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
       assoc <- cor(Y, X[,i], use='complete.obs', method='kendall')
       mesure='kendall'
     }
-    if(yformat %in% c('numeric','integer') & is.factor(xformats[i])) {
+    if(yformat %in% c('numeric','integer') & xformats[i]=="factor") {
       assoc <- summary(lm(Y ~ X[,i]))$adj.r.squared
       mesure='eta2'
     }
-    if(is.factor(yformat) & xformats[i]%in% c('numeric','integer')) {
+    if(yformat=="factor" & xformats[i]%in% c('numeric','integer')) {
       assoc <- summary(lm(X[,i] ~ Y))$adj.r.squared
       mesure='eta2'
     }
-    if(is.factor(yformat) & is.factor(xformats[i])) {
+    if(yformat=="factor" & xformats[i]=="factor") {
       t <- table(Y,X[,i])
       assoc <- sqrt(chisq.test(t)$statistic / (length(Y)*(min(nrow(t),ncol(t))-1)))
       mesure="cramer"
@@ -60,15 +61,15 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
         assoc <- cor(x1,x2, use='complete.obs', method='kendall')
         mesure='kendall'
       }
-      if(class(x1) %in% c('numeric','integer') & class(x2)=='factor') {
+      if(class(x1) %in% c('numeric','integer') & is.factor(x2)) {
         assoc <- summary(lm(x1~x2))$adj.r.squared
         mesure='eta2'
       }
-      if(class(x1)=='factor' & class(x2) %in% c('numeric','integer')) {
+      if(is.factor(x1) & class(x2) %in% c('numeric','integer')) {
         assoc <- summary(lm(x2~x1))$adj.r.squared
         mesure='eta2'
       }
-      if(class(x1)=='factor' & class(x2)=='factor') {
+      if(is.factor(x1) & is.factor(x2)) {
         t <- table(x1,x2)
         assoc <- sqrt(chisq.test(t)$statistic / (length(Y)*(min(nrow(t),ncol(t))-1)))
         mesure="cramer"

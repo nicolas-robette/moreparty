@@ -9,10 +9,10 @@ HAPF <- function(Y, X, nperm = 30, ntree = 50, distrib = 'approx', alpha = 0.05,
   # RETURNS: selected variables, a corresponding forest and the OOB-error
   #          with and without Bonferroni-Adjustment
   
-  if(class(Y)=='factor') mtry <- ceiling(sqrt(ncol(X))) # automatically set mtry to sqrt(p)
+  if(is.factor(Y)) mtry <- ceiling(sqrt(ncol(X))) # automatically set mtry to sqrt(p)
   if(class(Y) %in% c('numeric','integer')) mtry <- ceiling(ncol(X)/3) # automatically set mtry to p/3
   
-  if(class(Y)=='factor' & is.null(measure)) measure = 'AUC'
+  if(is.factor(Y) & is.null(measure)) measure = 'AUC'
   if(class(Y) %in% c('numeric','integer') & is.null(measure)) measure = 'RMSE'
   
   measureList = measures::listAllMeasures()
@@ -98,7 +98,7 @@ HAPF <- function(Y, X, nperm = 30, ntree = 50, distrib = 'approx', alpha = 0.05,
   if (any(p.vals < alpha)) { # keep significant variables
     selection <- names(p.vals)[which(p.vals < alpha)]
     exclusion <- base::setdiff(names(X),selection)
-    if(class(Y)=='factor') mtry <- ceiling(sqrt(length(selection))) # automatically set mtry to sqrt(p)
+    if(is.factor(Y)) mtry <- ceiling(sqrt(length(selection))) # automatically set mtry to sqrt(p)
     if(class(Y) %in% c('numeric','integer')) mtry <- ceiling(length(selection)/3) # automatically set mtry to p/3
     forest <- fastcforest(as.formula(paste("response", paste(selection,collapse="+"),sep="~")), data=dat, 
                           controls = party::cforest_unbiased(mtry = mtry, ntree = ntree),
@@ -108,7 +108,7 @@ HAPF <- function(Y, X, nperm = 30, ntree = 50, distrib = 'approx', alpha = 0.05,
   if (any(p.vals.bonf < alpha)) { # keep significant variables (Bonferroni)
     selection.bonf <- names(p.vals.bonf)[which(p.vals.bonf<alpha)]
     exclusion.bonf <- base::setdiff(names(X),selection.bonf)
-    if(class(Y)=='factor') mtry <- ceiling(sqrt(length(selection.bonf))) # automatically set mtry to sqrt(p)
+    if(is.factor(Y)) mtry <- ceiling(sqrt(length(selection.bonf))) # automatically set mtry to sqrt(p)
     if(class(Y) %in% c('numeric','integer')) mtry <- ceiling(length(selection.bonf)/3) # automatically set mtry to p/3
     forest.bonf <- fastcforest(as.formula(paste("response", paste(selection.bonf,collapse = " + "), sep = " ~ ")), data = dat, 
                                controls = party::cforest_unbiased(mtry = mtry, ntree = ntree),

@@ -6,10 +6,10 @@
 
 ALT <- function(Y, X, nperm = 10, ntree = 50, distrib = 'approx', alpha = 0.05, measure=NULL, parallel=FALSE, ...) { 
 
-  if(class(Y)=='factor') mtry <- ceiling(sqrt(ncol(X))) # automatically set mtry to sqrt(p)
+  if(is.factor(Y)) mtry <- ceiling(sqrt(ncol(X))) # automatically set mtry to sqrt(p)
   if(class(Y) %in% c('numeric','integer')) mtry <- ceiling(ncol(X)/3) # automatically set mtry to p/3
 
-  if(class(Y)=='factor' & is.null(measure)) measure = 'AUC'
+  if(is.factor(Y) & is.null(measure)) measure = 'AUC'
   if(class(Y) %in% c('numeric','integer') & is.null(measure)) measure = 'RMSE'
 
   measureList = measures::listAllMeasures()
@@ -78,8 +78,8 @@ ALT <- function(Y, X, nperm = 10, ntree = 50, distrib = 'approx', alpha = 0.05, 
   if (any(p.vals < alpha)) { # keep significant variables
     selection <- names(p.vals)[which(p.vals<alpha)]
     exclusion <- base::setdiff(names(X),selection)
-    if(class(Y)=='factor') mtry <- ceiling(sqrt(length(selection))) # set mtry to sqrt() of remaining variables
-    if(class(Y)=='numeric') mtry <- ceiling(length(selection)/3) # set mtry to ()/3 of remaining variables
+    if(is.factor(Y)) mtry <- ceiling(sqrt(length(selection))) # set mtry to sqrt() of remaining variables
+    if(class(Y) %in% c("numeric","integer")) mtry <- ceiling(length(selection)/3) # set mtry to ()/3 of remaining variables
     forest <- fastcforest(as.formula(paste("response", paste(selection, 
                                                          collapse = " + "), sep = " ~ ")), data = dat, 
                           controls = party::cforest_unbiased(mtry = mtry, ntree = ntree),

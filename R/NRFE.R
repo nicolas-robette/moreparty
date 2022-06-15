@@ -65,8 +65,8 @@ NRFE <- function(Y, X, ntree = 3000, measure = NULL, parallel = FALSE, ...) {
   #for (i in ncol(X):1) { # take backward rejection steps
   foo <- function(i) {
     #print(paste('rejection steps remaining =',i))
-    if(class(Y)=='factor') mtry <- ceiling(sqrt(i)) # set mtry to sqrt() of remaining variables
-    if(class(Y)=='numeric') mtry <- ceiling(i/3) # set mtry to ()/3 of remaining variables
+    if(is.factor(Y)) mtry <- ceiling(sqrt(i)) # set mtry to sqrt() of remaining variables
+    if(class(Y) %in% c('numeric','integer')) mtry <- ceiling(i/3) # set mtry to ()/3 of remaining variables
     forest <- fastcforest(as.formula(paste("response", paste(selections[[i]],
                                                              collapse = " + "), sep = " ~ ")), data = dat, # fit forest
                           controls = party::cforest_unbiased(mtry = mtry, ntree = ntree),
@@ -91,8 +91,8 @@ NRFE <- function(Y, X, ntree = 3000, measure = NULL, parallel = FALSE, ...) {
   # if (optimum.number.1se == 1) {forest.1se <- c(); selection.1se <- c(); exclusion.1se <- names(X)}
   # if (optimum.number.0se != 1) {
     selection.0se <- selections[[optimum.number.0se]]
-    if(class(Y)=='factor') mtry <- ceiling(sqrt(length(selection.0se))) # set mtry to sqrt() of remaining variables
-    if(class(Y)=='numeric') mtry <- ceiling(length(selection.0se)/3) # set mtry to ()/3 of remaining variables
+    if(is.factor(Y)) mtry <- ceiling(sqrt(length(selection.0se))) # set mtry to sqrt() of remaining variables
+    if(class(Y) %in% c('numeric','integer')) mtry <- ceiling(length(selection.0se)/3) # set mtry to ()/3 of remaining variables
     forest.0se <- fastcforest(as.formula(paste("response", paste(selection.0se,
                                                                  collapse = " + "), sep = " ~ ")), data = dat,
                               controls = party::cforest_unbiased(mtry = mtry, ntree = ntree),
@@ -100,8 +100,8 @@ NRFE <- function(Y, X, ntree = 3000, measure = NULL, parallel = FALSE, ...) {
   # }
   # if (optimum.number.1se != 1) {
     selection.1se <- selections[[optimum.number.1se]]
-    if(class(Y)=='factor') mtry <- ceiling(sqrt(length(selection.1se))) # set mtry to sqrt() of remaining variables
-    if(class(Y)=='numeric') mtry <- ceiling(length(selection.1se)/3) # set mtry to ()/3 of remaining variables
+    if(is.factor(Y)) mtry <- ceiling(sqrt(length(selection.1se))) # set mtry to sqrt() of remaining variables
+    if(class(Y) %in% c('numeric','integer')) mtry <- ceiling(length(selection.1se)/3) # set mtry to ()/3 of remaining variables
     forest.1se <- fastcforest(as.formula(paste("response", paste(selection.1se,
                                                                  collapse = " + "), sep = " ~ ")), data = dat,
                               controls = party::cforest_unbiased(mtry = mtry, ntree = ntree),

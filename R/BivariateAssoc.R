@@ -18,19 +18,19 @@ BivariateAssoc <- function(Y,X,xx=TRUE) {
   res <- list()
   for(i in 1:ncol(X)) {
     # print(i)
-    if(yformat=='numeric' & xformats[i] %in% c('numeric','integer')) {
+    if(yformat %in% c('numeric','integer') & xformats[i] %in% c('numeric','integer')) {
       assoc <- cor(Y, X[,i], use='complete.obs', method='kendall')
       mesure='kendall'
     }
-    if(yformat=='numeric' & xformats[i]=='factor') {
+    if(yformat %in% c('numeric','integer') & is.factor(xformats[i])) {
       assoc <- summary(lm(Y ~ X[,i]))$adj.r.squared
       mesure='eta2'
     }
-    if(yformat=='factor' & xformats[i]%in% c('numeric','integer')) {
+    if(is.factor(yformat) & xformats[i]%in% c('numeric','integer')) {
       assoc <- summary(lm(X[,i] ~ Y))$adj.r.squared
       mesure='eta2'
     }
-    if(yformat=='factor' & xformats[i]=='factor') {
+    if(is.factor(yformat) & is.factor(xformats[i])) {
       t <- table(Y,X[,i])
       assoc <- sqrt(chisq.test(t)$statistic / (length(Y)*(min(nrow(t),ncol(t))-1)))
       mesure="cramer"

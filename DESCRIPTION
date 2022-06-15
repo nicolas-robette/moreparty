@@ -1,6 +1,6 @@
 Package: moreparty
 Type: Package
-Title: A Toolbox for Conditional Inference Random Forests
+Title: A Toolbox for Conditional Inference Trees and Random Forests
 Version: 0.3
 Depends: R (>= 3.5.0), party
 Imports: partykit, varImp, plyr, foreach, measures, methods, MASS, iml, pdp, vip, ggplot2, rlang, shiny, shinyWidgets, rclipboard, DT, datamods, phosphoricons

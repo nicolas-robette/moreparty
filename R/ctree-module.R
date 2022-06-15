@@ -150,10 +150,12 @@ ctreeUI <- function(id) {
                   tabPanel(tagList(phosphoricons::ph("code", title = "R code"),
                                    "R code"),
                            value = 4,
+                           br(),
                            fluidPage(rclipboardSetup(),
                                      verbatimTextOutput(ns("codePrint")),
                                      # UI ouputs for the copy-to-clipboard buttons
-                                     uiOutput(ns("clip")))
+                                     uiOutput(ns("clip"))),
+                           br()
                   )  
       )
       

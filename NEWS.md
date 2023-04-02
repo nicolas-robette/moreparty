@@ -1,4 +1,9 @@
-# moreparty 0.3
+# moreparty 0.3.1 [CRAN]
+
+* bug fix in vignettes due to changes in dependencies
+
+
+# moreparty 0.3 [CRAN]
 
 ## New functions:
 
@@ -13,7 +18,7 @@
 
 
 
-# moreparty 0.2
+# moreparty 0.2 [CRAN]
 
 ## New functions:
 

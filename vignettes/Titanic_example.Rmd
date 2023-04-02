@@ -41,7 +41,7 @@ load(url('http://nicolas.robette.free.fr/Docs/results_titanic.RData'))
 First, the necessary packages are loaded into memory.
 
 ```{r init, cache=FALSE}
-library(tidyverse)  # data management
+library(dplyr)  # data management
 library(caret)  # confusion matrix
 library(party)  # conditional inference random forests and trees
 library(partykit)  # conditional inference trees
@@ -52,7 +52,7 @@ library(pdp)  # partial dependence
 library(vip)  # measure of interactions
 library(moreparty)  # surrogate trees, accumulated local effects, etc.
 library(RColorBrewer)  # color palettes
-library(GDAtools)  # bivariate analysis
+library(descriptio)  # bivariate analysis
 ```
 
 Now, we then import `titanic` data set from [`moreparty`](https://cran.r-project.org/package=moreparty).
@@ -79,7 +79,7 @@ BivariateAssoc(titanic$Survived, titanic[,-1])
 Survival is primarily associated with gender, secondarily with the passenger class. The explanatory variables are weakly related to each other.
 
 ```{r catdesc}
-catdesc(titanic$Survived, titanic[,-1], min.phi=0.1, robust=FALSE)
+catdesc(titanic$Survived, titanic[,-1], limit = 0.1, robust = FALSE, na.rm.cont = TRUE)
 ```
 
 Women, first class passengers and those who boarded at Cherbourg are over-represented among the survivors. Men, 3rd class passengers and those who boarded at Southampton are over-represented among the non-survivors.

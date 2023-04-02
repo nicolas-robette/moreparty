@@ -1,10 +1,10 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Titanic_example: Titanic_example.html
-last_built: 2021-07-14T12:45Z
+last_built: 2023-04-02T12:38Z
 urls:
-  reference: https://nicolas-robette.github.io/moreparty//reference
-  article: https://nicolas-robette.github.io/moreparty//articles
+  reference: https://nicolas-robette.github.io/moreparty/reference
+  article: https://nicolas-robette.github.io/moreparty/articles
 

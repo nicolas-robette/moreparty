@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -76,9 +72,9 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>[en] An example of recursive partitioning with Titanic data</h1>
-                        <h4 class="author">Nicolas Robette</h4>
+                        <h4 data-toc-skip class="author">Nicolas Robette</h4>
             
-            <h4 class="date">2021-07-14</h4>
+            <h4 data-toc-skip class="date">2023-04-02</h4>
       
       
       <div class="hidden name"><code>Titanic_example.Rmd</code></div>
@@ -87,28 +83,28 @@
 
     
     
-<div id="first-steps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#first-steps" class="anchor"></a>First steps</h2>
+<div class="section level2">
+<h2 id="first-steps">First steps<a class="anchor" aria-label="anchor" href="#first-steps"></a>
+</h2>
 <p>First, the necessary packages are loaded into memory.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>  <span class="co"># data management</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span>  <span class="co"># confusion matrix</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://party.R-forge.R-project.org">party</a></span><span class="op">)</span>  <span class="co"># conditional inference random forests and trees</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://partykit.r-forge.r-project.org/partykit/">partykit</a></span><span class="op">)</span>  <span class="co"># conditional inference trees</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://expasy.org/tools/pROC/">pROC</a></span><span class="op">)</span>  <span class="co"># ROC curves</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">measures</span><span class="op">)</span>  <span class="co"># performance measures</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">varImp</span><span class="op">)</span>  <span class="co"># variable importance</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bgreenwell.github.io/pdp/index.html">pdp</a></span><span class="op">)</span>  <span class="co"># partial dependence</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/koalaverse/vip/">vip</a></span><span class="op">)</span>  <span class="co"># measure of interactions</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">moreparty</span><span class="op">)</span>  <span class="co"># surrogate trees, accumulated local effects, etc.</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>  <span class="co"># color palettes</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nicolas-robette/GDAtools">GDAtools</a></span><span class="op">)</span>  <span class="co"># bivariate analysis</span></code></pre></div>
-<p>Now, we then import <code>titanic</code> data set from <a href="https://cran.r-project.org/package=moreparty"><code>moreparty</code></a>.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>  <span class="co"># data management</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/" class="external-link">caret</a></span><span class="op">)</span>  <span class="co"># confusion matrix</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://party.R-forge.R-project.org" class="external-link">party</a></span><span class="op">)</span>  <span class="co"># conditional inference random forests and trees</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://partykit.r-forge.r-project.org/partykit/" class="external-link">partykit</a></span><span class="op">)</span>  <span class="co"># conditional inference trees</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://expasy.org/tools/pROC/" class="external-link">pROC</a></span><span class="op">)</span>  <span class="co"># ROC curves</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">measures</span><span class="op">)</span>  <span class="co"># performance measures</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">varImp</span><span class="op">)</span>  <span class="co"># variable importance</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bgreenwell/pdp" class="external-link">pdp</a></span><span class="op">)</span>  <span class="co"># partial dependence</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/koalaverse/vip/" class="external-link">vip</a></span><span class="op">)</span>  <span class="co"># measure of interactions</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">moreparty</span><span class="op">)</span>  <span class="co"># surrogate trees, accumulated local effects, etc.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>  <span class="co"># color palettes</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nicolas-robette/descriptio" class="external-link">descriptio</a></span><span class="op">)</span>  <span class="co"># bivariate analysis</span></span></code></pre></div>
+<p>Now, we then import <code>titanic</code> data set from <a href="https://cran.r-project.org/package=moreparty" class="external-link"><code>moreparty</code></a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">)</span></code></pre></div>
-<pre><code>spec_tbl_df [1,309 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">)</span></span></code></pre></div>
+<pre><code>spc_tbl_ [1,309 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ Survived: Factor w/ 2 levels "No","Yes": 2 2 1 1 1 2 2 1 2 1 ...
  $ Sex     : Factor w/ 2 levels "female","male": 1 2 1 2 1 2 1 2 1 2 ...
  $ Pclass  : Factor w/ 3 levels "1st","2nd","3rd": 1 1 1 1 1 1 1 1 1 1 ...
@@ -116,7 +112,7 @@
  $ Embarked: Factor w/ 3 levels "Cherbourg","Queenstown",..: 3 3 3 3 3 3 3 3 3 1 ...</code></pre>
 <p>We have 1309 cases, one categorical explained variable, <code>Survived</code>, which codes whether or not an individual survived the shipwreck, and four explanatory variables (three categorical and one continuous): gender, age, passenger class, and port of embarkation. The distribution of the variables is examined.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">)</span></span></code></pre></div>
 <pre><code> Survived      Sex      Pclass         Age                 Embarked  
  No :809   female:466   1st:323   Min.   : 0.1667   Cherbourg  :270  
  Yes:500   male  :843   2nd:277   1st Qu.:21.0000   Queenstown :123  
@@ -128,7 +124,7 @@
 <p>The distribution of the explained variable is not balanced, as survival is largely in the minority. In addition, some explanatory variables have missing values, in particular <code>Age</code>.</p>
 <p>We examine the bivariate statistical relationships between the variables.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/BivariateAssoc.html">BivariateAssoc</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/BivariateAssoc.html">BivariateAssoc</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>$YX
   variable measure assoc p.value   criterion
 1      Sex  cramer 0.527 0.00000 0.000000000
@@ -146,13 +142,13 @@ $XX
 6       Sex       Age    eta2 0.003 0.03964 0.0404512887</code></pre>
 <p>Survival is primarily associated with gender, secondarily with the passenger class. The explanatory variables are weakly related to each other.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://nicolas-robette.github.io/GDAtools//reference/catdesc.html">catdesc</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, min.phi<span class="op">=</span><span class="fl">0.1</span>, robust<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://nicolas-robette.github.io/descriptio/reference/catdesc.html" class="external-link">catdesc</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, limit <span class="op">=</span> <span class="fl">0.1</span>, robust <span class="op">=</span> <span class="cn">FALSE</span>, na.rm.cont <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>$variables
-  variable    measure association permutation.pvalue
-1      Sex Cramer's V       0.529                 NA
-2   Pclass Cramer's V       0.313                 NA
-3 Embarked Cramer's V       0.184                 NA
-4      Age       Eta2       0.003                 NA
+  variable  measure association
+1      Sex Cramer V       0.529
+2   Pclass Cramer V       0.313
+3 Embarked Cramer V       0.190
+4      Age     Eta2       0.003
 
 $bylevel
 $bylevel$No
@@ -160,21 +156,21 @@ $bylevel$No$categories
              categories pct.ycat.in.xcat pct.xcat.in.ycat pct.xcat.global
 2              Sex.male            0.809            0.843           0.644
 3            Pclass.3rd            0.745            0.653           0.542
-6  Embarked.Southampton            0.667            0.754           0.699
-8    Embarked.Cherbourg            0.444            0.148           0.207
+6  Embarked.Southampton            0.667            0.754           0.698
+8    Embarked.Cherbourg            0.444            0.148           0.206
 9            Pclass.1st            0.381            0.152           0.247
 11           Sex.female            0.273            0.157           0.356
       phi
 2   0.529
 3   0.283
-6   0.152
-8  -0.183
+6   0.155
+8  -0.182
 9  -0.279
 11 -0.529
 
 $bylevel$No$continuous.var
   variables mean.x.in.ycat mean.x.global sd.x.in.ycat sd.x.global   cor
-1       Age             NA            NA           NA          NA 0.056
+1       Age           30.5          29.9         13.9        14.4 0.056
 
 
 $bylevel$Yes
@@ -182,35 +178,35 @@ $bylevel$Yes$categories
              categories pct.ycat.in.xcat pct.xcat.in.ycat pct.xcat.global
 1            Sex.female            0.727            0.678           0.356
 4            Pclass.1st            0.619            0.400           0.247
-5    Embarked.Cherbourg            0.556            0.301           0.207
-7  Embarked.Southampton            0.333            0.610           0.699
+5    Embarked.Cherbourg            0.556            0.300           0.206
+7  Embarked.Southampton            0.333            0.608           0.698
 10           Pclass.3rd            0.255            0.362           0.542
 12             Sex.male            0.191            0.322           0.644
       phi
 1   0.529
 4   0.279
-5   0.183
-7  -0.152
+5   0.182
+7  -0.155
 10 -0.283
 12 -0.529
 
 $bylevel$Yes$continuous.var
   variables mean.x.in.ycat mean.x.global sd.x.in.ycat sd.x.global    cor
-2       Age             NA            NA           NA          NA -0.056</code></pre>
+2       Age           28.9          29.9           15        14.4 -0.056</code></pre>
 <p>Women, first class passengers and those who boarded at Cherbourg are over-represented among the survivors. Men, 3rd class passengers and those who boarded at Southampton are over-represented among the non-survivors.</p>
 <p>Random forests imply a share of randomness (via resampling and drawing of splitting variables), as well as some interpretation tools (via variable permutations). From one program run to the next, the results may therefore differ slightly. If you wish to obtain the same results systematically and to ensure reproducibility, use the <code>set.seed</code> function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1912</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1912</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="classification-tree" class="section level2">
-<h2 class="hasAnchor">
-<a href="#classification-tree" class="anchor"></a>Classification tree</h2>
-<p>In order to build a classification tree with CTree conditional inference algorithm, we use <a href="https://cran.r-project.org/package=partykit"><code>partykit</code></a> package, which allows more flexibility than <a href="https://cran.r-project.org/package=party"><code>party</code></a> package, in particular to deal with missing values.</p>
+<div class="section level2">
+<h2 id="classification-tree">Classification tree<a class="anchor" aria-label="anchor" href="#classification-tree"></a>
+</h2>
+<p>In order to build a classification tree with CTree conditional inference algorithm, we use <a href="https://cran.r-project.org/package=partykit" class="external-link"><code>partykit</code></a> package, which allows more flexibility than <a href="https://cran.r-project.org/package=party" class="external-link"><code>party</code></a> package, in particular to deal with missing values.</p>
 <p>The tree can be displayed in textual or graphical form.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">arbre</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/ctree.html">ctree</a></span><span class="op">(</span><span class="va">Survived</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">titanic</span>, control<span class="op">=</span><span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/ctree_control.html">ctree_control</a></span><span class="op">(</span>minbucket<span class="op">=</span><span class="fl">30</span>, maxsurrogate<span class="op">=</span><span class="cn">Inf</span>, maxdepth<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">arbre</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">arbre</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/ctree.html" class="external-link">ctree</a></span><span class="op">(</span><span class="va">Survived</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">titanic</span>, control<span class="op">=</span><span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/ctree_control.html" class="external-link">ctree_control</a></span><span class="op">(</span>minbucket<span class="op">=</span><span class="fl">30</span>, maxsurrogate<span class="op">=</span><span class="cn">Inf</span>, maxdepth<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">arbre</span><span class="op">)</span></span></code></pre></div>
 <pre><code>
 Model formula:
 Survived ~ Sex + Pclass + Age + Embarked
@@ -235,12 +231,12 @@ Fitted party:
 Number of inner nodes:    7
 Number of terminal nodes: 8</code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pROC/man/plot.roc.html">plot</a></span><span class="op">(</span><span class="va">arbre</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">arbre</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/ctree-1.png" width="100%"></p>
 <p><code>Sex</code> is the first splitting variable, <code>Pclass</code> is the second and all the explanatory variables are used in the tree.</p>
 <p>The proportion of survivors varies greatly from one terminal node to another.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/nodeapply.html">nodeapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html">as.simpleparty</a></span><span class="op">(</span><span class="va">arbre</span><span class="op">)</span>, ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/nodeids.html">nodeids</a></span><span class="op">(</span><span class="va">arbre</span>, terminal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html">info_node</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">$</span><span class="va">distribution</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/nodeapply.html" class="external-link">nodeapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html" class="external-link">as.simpleparty</a></span><span class="op">(</span><span class="va">arbre</span><span class="op">)</span>, ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/nodeids.html" class="external-link">nodeids</a></span><span class="op">(</span><span class="va">arbre</span>, terminal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html" class="external-link">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">info_node</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">$</span><span class="va">distribution</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>$`4`
    No   Yes 
 0.035 0.965 
@@ -275,31 +271,31 @@ $`15`
 <p>Thus, 96.5% of women travelling in 1st class survive, compared with only 12.4% of men over 9 years of age travelling in 2nd or 3rd class.</p>
 <p>The graphical representation can be parameterized to obtain a simpler and more readable tree.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pROC/man/plot.roc.html">plot</a></span><span class="op">(</span><span class="va">arbre</span>, inner_panel<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/panelfunctions.html">node_inner</a></span><span class="op">(</span><span class="va">arbre</span>,id<span class="op">=</span><span class="cn">FALSE</span>,pval<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, terminal_panel<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/panelfunctions.html">node_barplot</a></span><span class="op">(</span><span class="va">arbre</span>,id<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, gp<span class="op">=</span><span class="fu">gpar</span><span class="op">(</span>cex<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span>, ep_args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>justmin<span class="op">=</span><span class="fl">15</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">arbre</span>, inner_panel<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/panelfunctions.html" class="external-link">node_inner</a></span><span class="op">(</span><span class="va">arbre</span>,id<span class="op">=</span><span class="cn">FALSE</span>,pval<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, terminal_panel<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/panelfunctions.html" class="external-link">node_barplot</a></span><span class="op">(</span><span class="va">arbre</span>,id<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, gp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>cex<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span>, ep_args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>justmin<span class="op">=</span><span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/ctree_plot-1.png" width="100%"></p>
-<p>Note that the <a href="https://cran.r-project.org/package=ggparty"><code>ggparty</code></a> package graphically represents Ctree trees with the <code>ggplot2</code> grammar.</p>
+<p>Note that the <a href="https://cran.r-project.org/package=ggparty" class="external-link"><code>ggparty</code></a> package graphically represents Ctree trees with the <code>ggplot2</code> grammar.</p>
 <p>To measure the performance of the tree, the AUC is calculated, by comparing predicted and observed survival.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pred_arbre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">arbre</span>, type<span class="op">=</span><span class="st">'prob'</span><span class="op">)</span><span class="op">[</span>,<span class="st">'Yes'</span><span class="op">]</span>
-
-<span class="va">auc_arbre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/measures/man/AUC.html">AUC</a></span><span class="op">(</span><span class="va">pred_arbre</span>, <span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, positive<span class="op">=</span><span class="st">'Yes'</span><span class="op">)</span>
-<span class="va">auc_arbre</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pred_arbre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">arbre</span>, type<span class="op">=</span><span class="st">'prob'</span><span class="op">)</span><span class="op">[</span>,<span class="st">'Yes'</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">auc_arbre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/measures/man/AUC.html" class="external-link">AUC</a></span><span class="op">(</span><span class="va">pred_arbre</span>, <span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, positive<span class="op">=</span><span class="st">'Yes'</span><span class="op">)</span></span>
+<span><span class="va">auc_arbre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.838</code></pre>
 <p>AUC is 0.838, which is a relatively high performance.</p>
 <p>To plot the ROC curve of the model :</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">pROC</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pROC/man/roc.html">roc</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">pred_arbre</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/pROC/man/ggroc.html">ggroc</a></span><span class="op">(</span>legacy.axes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="fl">0</span>,xend<span class="op">=</span><span class="fl">1</span>,y<span class="op">=</span><span class="fl">0</span>,yend<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"darkgrey"</span>, linetype<span class="op">=</span><span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">xlab</span><span class="op">(</span><span class="st">"TFP"</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">ylab</span><span class="op">(</span><span class="st">"TVP"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pROC</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pROC/man/roc.html" class="external-link">roc</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">pred_arbre</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/pROC/man/ggroc.html" class="external-link">ggroc</a></span><span class="op">(</span>legacy.axes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">0</span>,xend<span class="op">=</span><span class="fl">1</span>,y<span class="op">=</span><span class="fl">0</span>,yend<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"darkgrey"</span>, linetype<span class="op">=</span><span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"TFP"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"TVP"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/roc_tree-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>Other performance measures are based on the confusion matrix.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">pred_arbre</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="va">factor</span> <span class="op">%&gt;%</span>
-  <span class="fu">caret</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/caret/man/confusionMatrix.html">confusionMatrix</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, positive<span class="op">=</span><span class="st">'Yes'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">pred_arbre</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">factor</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">caret</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/caret/man/confusionMatrix.html" class="external-link">confusionMatrix</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, positive<span class="op">=</span><span class="st">'Yes'</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
@@ -329,115 +325,114 @@ Prediction  No Yes
                                           </code></pre>
 <p>The <code>GetSplitStats</code> function allows to examine the result of the competition between covariates in the choice of splitting variables. If, for a given node, the splitting variable is significantly more associated with the explained variable than the other explanatory variables, we can think that this split is stable.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/GetSplitStats.html">GetSplitStats</a></span><span class="op">(</span><span class="va">arbre</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/GetSplitStats.html">GetSplitStats</a></span><span class="op">(</span><span class="va">arbre</span><span class="op">)</span></span></code></pre></div>
 <pre><code>$`1`
-                    Sex        Pclass        Age      Embarked
-statistic  3.656074e+02  1.277615e+02  3.2203137  4.420789e+01
-p.value    6.771232e-81  7.227818e-28  0.2606920  1.005629e-09
-criterion -6.771232e-81 -7.227818e-28 -0.3020406 -1.005629e-09
+          statistic      p.value     criterion        ratio
+Sex      365.607431 6.771232e-81 -6.771232e-81 1.000000e+00
+Pclass   127.761479 7.227818e-28 -7.227818e-28 1.067430e+53
+Embarked  44.207893 1.005629e-09 -1.005629e-09 1.485150e+71
+Age        3.220314 2.606920e-01 -3.020406e-01 4.460645e+79
 
 $`2`
-                 Pclass         Age      Embarked
-statistic  1.154544e+02  7.07039686  2.433650e+01
-p.value    2.549845e-25  0.02332660  1.557812e-05
-criterion -2.549845e-25 -0.02360298 -1.557824e-05
+          statistic      p.value     criterion        ratio
+Pclass   115.454414 2.549845e-25 -2.549845e-25 1.000000e+00
+Embarked  24.336500 1.557812e-05 -1.557824e-05 6.109486e+19
+Age        7.070397 2.332660e-02 -2.360298e-02 9.256632e+22
 
 $`3`
-               Pclass        Age   Embarked
-statistic  5.91071179  0.2003411  4.2482494
-p.value    0.04447125  0.9587381  0.3174531
-criterion -0.04549043 -3.1878160 -0.3819240
+         statistic    p.value   criterion    ratio
+Pclass   5.9107118 0.04447125 -0.04549043  1.00000
+Embarked 4.2482494 0.31745308 -0.38192401  8.39570
+Age      0.2003411 0.95873811 -3.18781595 70.07663
 
 $`6`
-                 Age     Embarked
-statistic  1.7248154 12.759465580
-p.value    0.3423996  0.003388277
-criterion -0.4191579 -0.003394030
+         statistic     p.value   criterion    ratio
+Embarked 12.759466 0.003388277 -0.00339403   1.0000
+Age       1.724815 0.342399641 -0.41915789 123.4986
 
 $`9`
-                 Pclass          Age      Embarked
-statistic  3.299374e+01 10.838488444 17.7107774921
-p.value    2.054102e-07  0.002979392  0.0004277725
-criterion -2.054103e-07 -0.002983839 -0.0004278640
+         statistic      p.value     criterion     ratio
+Pclass    32.99374 2.054102e-07 -2.054103e-07     1.000
+Embarked  17.71078 4.277725e-04 -4.278640e-04  2082.973
+Age       10.83849 2.979392e-03 -2.983839e-03 14526.240
 
 $`10`
-                   Age   Embarked
-statistic  9.079224404  2.1938826
-p.value    0.005163910  0.5562985
-criterion -0.005177289 -0.8126033
+         statistic    p.value    criterion    ratio
+Age       9.079224 0.00516391 -0.005177289   1.0000
+Embarked  2.193883 0.55629854 -0.812603321 156.9554
 
 $`13`
-               Pclass           Age   Embarked
-statistic  0.03486032  2.540589e+01  5.2715095
-p.value    0.99675089  1.393491e-06  0.1999551
-criterion -5.72937273 -1.393492e-06 -0.2230874</code></pre>
+           statistic      p.value     criterion     ratio
+Age      25.40589207 1.393491e-06 -1.393492e-06       1.0
+Embarked  5.27150955 1.999551e-01 -2.230874e-01  160092.3
+Pclass    0.03486032 9.967509e-01 -5.729373e+00 4111521.7</code></pre>
 <p>In this case, for each of the nodes, the result of the competition is final (see <code>criterion</code>). The tree therefore appears to be stable.</p>
 </div>
-<div id="random-forest" class="section level2">
-<h2 class="hasAnchor">
-<a href="#random-forest" class="anchor"></a>Random forest</h2>
+<div class="section level2">
+<h2 id="random-forest">Random forest<a class="anchor" aria-label="anchor" href="#random-forest"></a>
+</h2>
 <p>Then we build a random forest with conditional inference algorithm, <code>mtry</code>=2 and <code>ntree</code>=500.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">foret</span> <span class="op">&lt;-</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html">cforest</a></span><span class="op">(</span><span class="va">Survived</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">titanic</span>, controls<span class="op">=</span><span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">2</span>,ntree<span class="op">=</span><span class="fl">500</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">foret</span> <span class="op">&lt;-</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Survived</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">titanic</span>, controls<span class="op">=</span><span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">2</span>,ntree<span class="op">=</span><span class="fl">500</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>To compare the performance of the forest to that of the tree, the predictions and then the AUC are calculated.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pred_foret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">foret</span>, type<span class="op">=</span><span class="st">'prob'</span><span class="op">)</span> <span class="op">%&gt;%</span>
-              <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">'rbind.data.frame'</span>,<span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span>
-              <span class="fu">select</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
-              <span class="va">unlist</span>
-
-<span class="va">auc_foret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/measures/man/AUC.html">AUC</a></span><span class="op">(</span><span class="va">pred_foret</span>, <span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, positive<span class="op">=</span><span class="st">'Yes'</span><span class="op">)</span>
-<span class="va">auc_foret</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pred_foret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">foret</span>, type<span class="op">=</span><span class="st">'prob'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>              <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">'rbind.data.frame'</span>,<span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>              <span class="va">unlist</span></span>
+<span></span>
+<span><span class="va">auc_foret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/measures/man/AUC.html" class="external-link">AUC</a></span><span class="op">(</span><span class="va">pred_foret</span>, <span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, positive<span class="op">=</span><span class="st">'Yes'</span><span class="op">)</span></span>
+<span><span class="va">auc_foret</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.879</code></pre>
 <p>The performance of the forest is 0.879, therefore slightly better than that of the tree.</p>
 <p>The <code>OOB=TRUE</code> option allows predictions to be made from out-of-bag observations, thus avoiding optimism bias.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pred_oob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">foret</span>, type<span class="op">=</span><span class="st">'prob'</span>, OOB<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-              <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">'rbind.data.frame'</span>,<span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span>
-              <span class="fu">select</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
-              <span class="va">unlist</span>
-
-<span class="va">auc_oob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/measures/man/AUC.html">AUC</a></span><span class="op">(</span><span class="va">pred_oob</span>, <span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, positive<span class="op">=</span><span class="st">'Yes'</span><span class="op">)</span>
-<span class="va">auc_oob</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pred_oob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">foret</span>, type<span class="op">=</span><span class="st">'prob'</span>, OOB<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>              <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">'rbind.data.frame'</span>,<span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>              <span class="va">unlist</span></span>
+<span></span>
+<span><span class="va">auc_oob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/measures/man/AUC.html" class="external-link">AUC</a></span><span class="op">(</span><span class="va">pred_oob</span>, <span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, positive<span class="op">=</span><span class="st">'Yes'</span><span class="op">)</span></span>
+<span><span class="va">auc_oob</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.847</code></pre>
 <p>Calculated in this way, the performance is indeed slightly lower (0.847).</p>
 </div>
-<div id="surrogate-tree" class="section level2">
-<h2 class="hasAnchor">
-<a href="#surrogate-tree" class="anchor"></a>Surrogate tree</h2>
+<div class="section level2">
+<h2 id="surrogate-tree">Surrogate tree<a class="anchor" aria-label="anchor" href="#surrogate-tree"></a>
+</h2>
 <p>The so-called “surrogate tree” can be a way to synthesize a complex model.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">surro</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SurrogateTree.html">SurrogateTree</a></span><span class="op">(</span><span class="va">foret</span>, maxdepth<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
-
-<span class="va">surro</span><span class="op">$</span><span class="va">r.squared</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">surro</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SurrogateTree.html">SurrogateTree</a></span><span class="op">(</span><span class="va">foret</span>, maxdepth<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">surro</span><span class="op">$</span><span class="va">r.squared</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.96</code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pROC/man/plot.roc.html">plot</a></span><span class="op">(</span><span class="va">surro</span><span class="op">$</span><span class="va">tree</span>, inner_panel<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/panelfunctions.html">node_inner</a></span><span class="op">(</span><span class="va">surro</span><span class="op">$</span><span class="va">tree</span>,id<span class="op">=</span><span class="cn">FALSE</span>,pval<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, terminal_panel<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/panelfunctions.html">node_boxplot</a></span><span class="op">(</span><span class="va">surro</span><span class="op">$</span><span class="va">tree</span>,id<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, gp<span class="op">=</span><span class="fu">gpar</span><span class="op">(</span>cex<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span>, ep_args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>justmin<span class="op">=</span><span class="fl">15</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surro</span><span class="op">$</span><span class="va">tree</span>, inner_panel<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/panelfunctions.html" class="external-link">node_inner</a></span><span class="op">(</span><span class="va">surro</span><span class="op">$</span><span class="va">tree</span>,id<span class="op">=</span><span class="cn">FALSE</span>,pval<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, terminal_panel<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/panelfunctions.html" class="external-link">node_boxplot</a></span><span class="op">(</span><span class="va">surro</span><span class="op">$</span><span class="va">tree</span>,id<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, gp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>cex<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span>, ep_args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>justmin<span class="op">=</span><span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/surrogate-1.png" width="100%"></p>
 <p>The surrogate tree reproduces here very faithfully the predictions of the random forest (R2 = 0.96). It is also very similar to the initial classification tree.</p>
 </div>
-<div id="variable-importance" class="section level2">
-<h2 class="hasAnchor">
-<a href="#variable-importance" class="anchor"></a>Variable importance</h2>
+<div class="section level2">
+<h2 id="variable-importance">Variable importance<a class="anchor" aria-label="anchor" href="#variable-importance"></a>
+</h2>
 <p>To go further in the interpretation of the results, permutation variable importance is calculated (using AUC as a performance measure). Since the explanatory variables have little correlation with each other, it is not necessary to use the “conditional permutation scheme” (available with the <code>conditional=TRUE</code> option in the <code>varImpAUC</code> function).</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">importance</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/pkg/varImp/man/varImpAUC.html">varImpAUC</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span>
-<span class="va">importance</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">importance</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/pkg/varImp/man/varImpAUC.html" class="external-link">varImpAUC</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span></span>
+<span><span class="va">importance</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>     Sex   Pclass      Age Embarked 
   -0.213   -0.066   -0.026   -0.008 </code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggVarImp.html">ggVarImp</a></span><span class="op">(</span><span class="op">-</span><span class="va">importance</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggVarImp.html">ggVarImp</a></span><span class="op">(</span><span class="op">-</span><span class="va">importance</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/vimp-1.png" width="480" style="display: block; margin: auto;"></p>
 <p><code>Sex</code> is the most important variable, ahead of <code>Pclass</code>, <code>Age</code> and <code>Embarked</code> (whose importance is close to zero).</p>
 </div>
-<div id="first-order-effects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#first-order-effects" class="anchor"></a>First order effects</h2>
+<div class="section level2">
+<h2 id="first-order-effects">First order effects<a class="anchor" aria-label="anchor" href="#first-order-effects"></a>
+</h2>
 <p>The calculation of partial dependences of all the covariates can then be performed using the <code>GetPartialData</code> function.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetPartialData.html">GetPartialData</a></span><span class="op">(</span><span class="va">foret</span>, which.class<span class="op">=</span><span class="fl">2</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pdep</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetPartialData.html">GetPartialData</a></span><span class="op">(</span><span class="va">foret</span>, which.class<span class="op">=</span><span class="fl">2</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pdep</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pdep</span></span></code></pre></div>
 <pre><code>        var       cat     value
 1       Sex    female 0.6705362
 2       Sex      male 0.2105944
@@ -467,64 +462,64 @@ criterion -5.72937273 -1.393492e-06 -0.2230874</code></pre>
  [ reached 'max' / getOption("max.print") -- omitted 2 rows ]</code></pre>
 <p>They can be represented graphically.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggForestEffects.html">ggForestEffects</a></span><span class="op">(</span><span class="va">pdep</span>, vline<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">pred_foret</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">"Probability of survival"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">xlim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggForestEffects.html">ggForestEffects</a></span><span class="op">(</span><span class="va">pdep</span>, vline<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">pred_foret</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">"Probability of survival"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">xlim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/pdp_plot-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>The dashed line represents the average predicted probability of survival. We can see for example that the probability of survival is much higher for women or that it decreases when we go from 1st to 3rd class.</p>
 <p>We’re zooming in on age to see its effect more closely. Partial dependencies are calculated for 40 quantiles of the age distribution, this high number allowing a more precise examination.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pdep_age</span> <span class="op">&lt;-</span> <span class="fu">pdp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pdp/man/partial.html">partial</a></span><span class="op">(</span><span class="va">foret</span>, <span class="st">'Age'</span>, which.class<span class="op">=</span><span class="fl">2</span>, prob<span class="op">=</span><span class="cn">TRUE</span>, quantiles<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">39</span><span class="op">/</span><span class="fl">40</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pdep_age</span> <span class="op">&lt;-</span> <span class="fu">pdp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pdp/man/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">foret</span>, <span class="st">'Age'</span>, which.class<span class="op">=</span><span class="fl">2</span>, prob<span class="op">=</span><span class="cn">TRUE</span>, quantiles<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">39</span><span class="op">/</span><span class="fl">40</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">pdep_age</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span>, y<span class="op">=</span><span class="va">yhat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_hline</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>yintercept<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">pred_foret</span><span class="op">)</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">0.2</span>, linetype<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'black'</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Probability of survival"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">pdep_age</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span>, y<span class="op">=</span><span class="va">yhat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>yintercept<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">pred_foret</span><span class="op">)</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">0.2</span>, linetype<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'black'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Probability of survival"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/pdp_plot_age-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>The probability of survival for young children is high, but drops rapidly with age. It is around the average for young adults and declines again after age 30.</p>
 <p>We often limit ourselves to examining <em>average</em> survival probabilities, but we can also look at their <em>distribution</em>, in numerical form :</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pdep_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetPartialData.html">GetPartialData</a></span><span class="op">(</span><span class="va">foret</span>, which.class<span class="op">=</span><span class="fl">2</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, prob<span class="op">=</span><span class="cn">TRUE</span>, ice<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pdep_ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetPartialData.html">GetPartialData</a></span><span class="op">(</span><span class="va">foret</span>, which.class<span class="op">=</span><span class="fl">2</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, prob<span class="op">=</span><span class="cn">TRUE</span>, ice<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pdep_ind</span> <span class="op">%&gt;%</span> <span class="fu">group_by</span><span class="op">(</span><span class="va">var</span>, <span class="va">cat</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">summarise</span><span class="op">(</span>prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,
-                                              Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">value</span>, <span class="fl">0.25</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,
-                                              Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">value</span>, <span class="fl">0.75</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code># A tibble: 27 x 5
-# Groups:   var [4]
+<code class="sourceCode R"><span><span class="va">pdep_ind</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">var</span>, <span class="va">cat</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>                                              Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">value</span>, <span class="fl">0.25</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>                                              Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">value</span>, <span class="fl">0.75</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code> [38;5;246m# A tibble: 27 × 5 [39m
+ [38;5;246m# Groups:   var [4] [39m
    var   cat    prob    Q1    Q3
-   &lt;fct&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 Age   14    0.409 0.137 0.596
- 2 Age   18    0.384 0.12  0.568
- 3 Age   19    0.385 0.124 0.567
- 4 Age   21    0.385 0.131 0.562
- 5 Age   22    0.385 0.124 0.576
- 6 Age   24    0.386 0.139 0.572
- 7 Age   25    0.391 0.167 0.556
- 8 Age   26    0.39  0.16  0.556
- 9 Age   28    0.369 0.136 0.512
-10 Age   30    0.374 0.155 0.509
-# … with 17 more rows</code></pre>
+    [3m [38;5;246m&lt;fct&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m  [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;dbl&gt; [39m [23m
+ [38;5;250m 1 [39m Age   14    0.409 0.137 0.596
+ [38;5;250m 2 [39m Age   18    0.384 0.12  0.568
+ [38;5;250m 3 [39m Age   19    0.385 0.124 0.567
+ [38;5;250m 4 [39m Age   21    0.385 0.131 0.562
+ [38;5;250m 5 [39m Age   22    0.385 0.124 0.576
+ [38;5;250m 6 [39m Age   24    0.386 0.139 0.572
+ [38;5;250m 7 [39m Age   25    0.391 0.167 0.556
+ [38;5;250m 8 [39m Age   26    0.39  0.16  0.556
+ [38;5;250m 9 [39m Age   28    0.369 0.136 0.512
+ [38;5;250m10 [39m Age   30    0.374 0.155 0.509
+ [38;5;246m# ℹ 17 more rows [39m</code></pre>
 <p>Or in graphical form :</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">pdep_ind</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>, y <span class="op">=</span> <span class="va">cat</span>, group <span class="op">=</span> <span class="va">cat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-         <span class="fu">geom_boxplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill<span class="op">=</span><span class="va">var</span><span class="op">)</span>, notch<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> 
-         <span class="fu">geom_vline</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>xintercept<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">pred_foret</span><span class="op">)</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">0.2</span>, linetype<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'black'</span><span class="op">)</span> <span class="op">+</span>
-         <span class="fu">facet_grid</span><span class="op">(</span><span class="va">var</span> <span class="op">~</span> <span class="va">.</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, space <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span> 
-         <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
-         <span class="fu">theme</span><span class="op">(</span>panel.grid <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
-               panel.grid.major.y <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>size<span class="op">=</span><span class="fl">.1</span>, color<span class="op">=</span><span class="st">"grey70"</span><span class="op">)</span>,
-               legend.position <span class="op">=</span> <span class="st">"none"</span>,
-               strip.text.y <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-         <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">xlim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-         <span class="fu">xlab</span><span class="op">(</span><span class="st">"Probability of survival"</span><span class="op">)</span> <span class="op">+</span>
-         <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">pdep_ind</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>, y <span class="op">=</span> <span class="va">cat</span>, group <span class="op">=</span> <span class="va">cat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">var</span><span class="op">)</span>, notch<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">pred_foret</span><span class="op">)</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">0.2</span>, linetype<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'black'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">var</span> <span class="op">~</span> <span class="va">.</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, space <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>               panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">.1</span>, color<span class="op">=</span><span class="st">"grey70"</span><span class="op">)</span>,</span>
+<span>               legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>               strip.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">xlim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Probability of survival"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/pdp_boxplot-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>The accumulated local effects (ALE) of all explanatory variables can be calculated simply with the <code>GetAleData</code> function.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ale</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetAleData.html">GetAleData</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ale</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetAleData.html">GetAleData</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ale</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ale</span></span></code></pre></div>
 <pre><code>      var    cat        value
 1     Sex female  0.294845647
 2     Sex   male -0.172964164
@@ -554,78 +549,79 @@ criterion -5.72937273 -1.393492e-06 -0.2230874</code></pre>
  [ reached 'max' / getOption("max.print") -- omitted 4 rows ]</code></pre>
 <p>The effects are then represented graphically. These are very convergent with the partial dependences, which is not surprising given that the explanatory variables here have little correlation.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggForestEffects.html">ggForestEffects</a></span><span class="op">(</span><span class="va">ale</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggForestEffects.html">ggForestEffects</a></span><span class="op">(</span><span class="va">ale</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/ale_plot-1.png" width="480" style="display: block; margin: auto;"></p>
 </div>
-<div id="interactions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#interactions" class="anchor"></a>Interactions</h2>
-<p>We now wish to identify the main 2nd order interactions, using the algorithm of Greenwell et al (2018) available with <code>GetInteractionStrength</code> (a simple wrapper for <code>vint</code> function in <a href="https://cran.r-project.org/package=vip"><code>vip</code></a> package).</p>
+<div class="section level2">
+<h2 id="interactions">Interactions<a class="anchor" aria-label="anchor" href="#interactions"></a>
+</h2>
+<p>We now wish to identify the main 2nd order interactions, using the algorithm of Greenwell et al (2018) available with <code>GetInteractionStrength</code> (a simple wrapper for <code>vint</code> function in <a href="https://cran.r-project.org/package=vip" class="external-link"><code>vip</code></a> package).</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">vint</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetInteractionStrength.html">GetInteractionStrength</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">vint</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetInteractionStrength.html">GetInteractionStrength</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">vint</span></code></pre></div>
-<pre><code># A tibble: 6 x 2
+<code class="sourceCode R"><span><span class="va">vint</span></span></code></pre></div>
+<pre><code> [38;5;246m# A tibble: 6 × 2 [39m
   Variables       Interaction
-  &lt;fct&gt;                 &lt;dbl&gt;
-1 Sex*Pclass           0.330 
-2 Sex*Age              0.0636
-3 Pclass*Embarked      0.0508
-4 Pclass*Age           0.0482
-5 Age*Embarked         0.0349
-6 Sex*Embarked         0.0255</code></pre>
+   [3m [38;5;246m&lt;fct&gt; [39m [23m                  [3m [38;5;246m&lt;dbl&gt; [39m [23m
+ [38;5;250m1 [39m Sex*Pclass           0.330 
+ [38;5;250m2 [39m Sex*Age              0.063 [4m6 [24m
+ [38;5;250m3 [39m Pclass*Embarked      0.050 [4m8 [24m
+ [38;5;250m4 [39m Pclass*Age           0.048 [4m2 [24m
+ [38;5;250m5 [39m Age*Embarked         0.034 [4m9 [24m
+ [38;5;250m6 [39m Sex*Embarked         0.025 [4m5 [24m</code></pre>
 <p>The interaction between Sex and Pclass is by far the most pronounced.</p>
-<p>The main second order interactions are then studied using partial dependence, with <code>partial</code> function from <a href="https://cran.r-project.org/package=pdp"><code>pdp</code></a> package.</p>
+<p>The main second order interactions are then studied using partial dependence, with <code>partial</code> function from <a href="https://cran.r-project.org/package=pdp" class="external-link"><code>pdp</code></a> package.</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pdep_sexclass</span> <span class="op">&lt;-</span> <span class="fu">pdp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pdp/man/partial.html">partial</a></span><span class="op">(</span><span class="va">foret</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Sex'</span>,<span class="st">'Pclass'</span><span class="op">)</span>, quantiles<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, which.class<span class="op">=</span><span class="fl">2L</span>, prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pdep_sexclass</span> <span class="op">&lt;-</span> <span class="fu">pdp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pdp/man/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">foret</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Sex'</span>,<span class="st">'Pclass'</span><span class="op">)</span>, quantiles<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, which.class<span class="op">=</span><span class="fl">2L</span>, prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">pdep_sexclass</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">Pclass</span>, <span class="va">yhat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color<span class="op">=</span><span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">pdep_sexclass</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">Pclass</span>, <span class="va">yhat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/pd_plot_inter2_sexclass-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>Pclass has a greater effect on women than on men. In women, it opposes the 1st and 2nd classes to the 3rd; in men, the 1st class opposes the others.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pdep_sexage</span> <span class="op">&lt;-</span> <span class="fu">pdp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pdp/man/partial.html">partial</a></span><span class="op">(</span><span class="va">foret</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Sex'</span>,<span class="st">'Age'</span><span class="op">)</span>, quantiles<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, which.class<span class="op">=</span><span class="fl">2L</span>, prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pdep_sexage</span> <span class="op">&lt;-</span> <span class="fu">pdp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pdp/man/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">foret</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Sex'</span>,<span class="st">'Age'</span><span class="op">)</span>, quantiles<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, which.class<span class="op">=</span><span class="fl">2L</span>, prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">pdep_sexage</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">Age</span>, <span class="va">yhat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color<span class="op">=</span><span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">pdep_sexage</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">Age</span>, <span class="va">yhat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/pd_plot_inter2_sexage-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>Age has little effect on survival for females, while it plays a more pronounced role for males, with young boys having a higher probability of survival than adult men.</p>
 <p>An interaction of order 3 using partial dependence :</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pdep_sexclassage</span> <span class="op">&lt;-</span> <span class="fu">pdp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pdp/man/partial.html">partial</a></span><span class="op">(</span><span class="va">foret</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Sex'</span>,<span class="st">'Pclass'</span>,<span class="st">'Age'</span><span class="op">)</span>, quantiles<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, which.class<span class="op">=</span><span class="fl">2L</span>, prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pdep_sexclassage</span> <span class="op">&lt;-</span> <span class="fu">pdp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pdp/man/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">foret</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Sex'</span>,<span class="st">'Pclass'</span>,<span class="st">'Age'</span><span class="op">)</span>, quantiles<span class="op">=</span><span class="cn">TRUE</span>, probs<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">/</span><span class="fl">20</span>, which.class<span class="op">=</span><span class="fl">2L</span>, prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'dodgerblue'</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'tomato'</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">pdep_sexclassage</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>sexclass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span><span class="op">(</span><span class="va">Pclass</span>,<span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-                     <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span>, y<span class="op">=</span><span class="va">yhat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-                       <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>colour<span class="op">=</span><span class="va">sexclass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-                       <span class="fu">scale_color_manual</span><span class="op">(</span>values<span class="op">=</span><span class="va">cols</span><span class="op">)</span> <span class="op">+</span>
-                       <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
-                       <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'dodgerblue'</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'tomato'</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">pdep_sexclassage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>                     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sexclass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interaction.html" class="external-link">interaction</a></span><span class="op">(</span><span class="va">Pclass</span>,<span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>                     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span>, y<span class="op">=</span><span class="va">yhat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>colour<span class="op">=</span><span class="va">sexclass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">cols</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="http://nicolas.robette.free.fr/Docs/plot_inter3.png" width="70%" style="display: block; margin: auto;"></p>
 <p>For example, we see that the age effect plays mainly for 2nd and 3rd class males.</p>
 <p>Alternatively, second order interactions can be analyzed using accumulated local effects (excluding interactions between two categorical variables).</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ale_sex_age</span> <span class="op">=</span> <span class="fu"><a href="../reference/GetAleData.html">GetAleData</a></span><span class="op">(</span><span class="va">foret</span>, xnames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sex"</span>,<span class="st">"Age"</span><span class="op">)</span>, order<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ale_sex_age</span> <span class="op">=</span> <span class="fu"><a href="../reference/GetAleData.html">GetAleData</a></span><span class="op">(</span><span class="va">foret</span>, xnames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sex"</span>,<span class="st">"Age"</span><span class="op">)</span>, order<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ale_sex_age</span> <span class="op">%&gt;%</span> <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Age</span>, <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-                  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color<span class="op">=</span><span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-                  <span class="fu">geom_hline</span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>, linetype<span class="op">=</span><span class="fl">2</span>, color<span class="op">=</span><span class="st">'gray60'</span><span class="op">)</span> <span class="op">+</span>
-                  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ale_sex_age</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">Age</span>, <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>                  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>, linetype<span class="op">=</span><span class="fl">2</span>, color<span class="op">=</span><span class="st">'gray60'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/ale_plot_inter2-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>The additional effect of the interaction between <code>Sex</code> and <code>Age</code> (relative to the main effects of these variables) is mainly present for children: being a boy is associated with a higher probability of survival and vice versa for girls.</p>
 </div>
-<div id="prototypes-and-outliers" class="section level2">
-<h2 class="hasAnchor">
-<a href="#prototypes-and-outliers" class="anchor"></a>Prototypes and outliers</h2>
+<div class="section level2">
+<h2 id="prototypes-and-outliers">Prototypes and outliers<a class="anchor" aria-label="anchor" href="#prototypes-and-outliers"></a>
+</h2>
 <p>The prototypes are observations that are representative of their class. The calculation is based on the proximity matrix between observations.</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">prox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html">proximity</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span>
-<span class="va">proto</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Prototypes.html">Prototypes</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, <span class="va">prox</span><span class="op">)</span>
-<span class="va">proto</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">prox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">proximity</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span></span>
+<span><span class="va">proto</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Prototypes.html">Prototypes</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, <span class="va">prox</span><span class="op">)</span></span>
+<span><span class="va">proto</span></span></code></pre></div>
 <pre><code>$Yes
      Sex      Pclass Age  Embarked     
 [1,] "female" "1st"  "22" "Cherbourg"  
@@ -644,14 +640,14 @@ $No
 <p>The prototypes of survivors are all adult women traveling first class. The prototypes of non-survivors are all adult males.</p>
 <p>The proximity matrix also makes it possible to identify outliers.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">bind_cols</span><span class="op">(</span>pred<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pred_foret</span>,<span class="fl">2</span><span class="op">)</span>,<span class="va">titanic</span><span class="op">)</span> <span class="op">%&gt;%</span>
-         <span class="fu"><a href="../reference/Outliers.html">Outliers</a></span><span class="op">(</span><span class="va">prox</span>, <span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">.</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">scores</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span>pred<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">pred_foret</span>,<span class="fl">2</span><span class="op">)</span>,<span class="va">titanic</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>         <span class="fu"><a href="../reference/Outliers.html">Outliers</a></span><span class="op">(</span><span class="va">prox</span>, <span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">.</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">scores</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Titanic_example_files/figure-html/outliers1-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>Only a few observations have a score above 10 (the threshold suggested by Breiman).</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">arrange</span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">outliers</span>, <span class="va">Survived</span>, <span class="fu">desc</span><span class="op">(</span><span class="va">scores</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">Survived</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">outliers</span>, <span class="va">Survived</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">scores</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">Survived</span><span class="op">)</span></span></code></pre></div>
 <pre><code>$No
   rowname pred Survived    Sex Pclass Age    Embarked   scores
 1     106 0.95       No female    1st  36   Cherbourg 40.88546
@@ -679,29 +675,29 @@ $Yes
  [ reached 'max' / getOption("max.print") -- omitted 2 rows ]</code></pre>
 <p>Outliers among survivors are women travelling in 1st or 2nd class, whose predicted probability of survival is very high. Conversely, outliers among non-survivors are males travelling in 2nd or 3rd class, whose predicted probability of survival is low.</p>
 </div>
-<div id="feature-selection" class="section level2">
-<h2 class="hasAnchor">
-<a href="#feature-selection" class="anchor"></a>Feature selection</h2>
+<div class="section level2">
+<h2 id="feature-selection">Feature selection<a class="anchor" aria-label="anchor" href="#feature-selection"></a>
+</h2>
 <p>Variable selection is of little use in this case, where there are only four explanatory variables. However, as an illustration, the “recursive feature elimination” algorithm is applied. Note that this procedure can be time consuming, even in its parallelized version (especially for the ‘ALT’ and ‘HAPF’ algorithms).</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">featsel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/FeatureSelection.html">FeatureSelection</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, method<span class="op">=</span><span class="st">"RFE"</span>, positive<span class="op">=</span><span class="st">"Yes"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">featsel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/FeatureSelection.html">FeatureSelection</a></span><span class="op">(</span><span class="va">titanic</span><span class="op">$</span><span class="va">Survived</span>, <span class="va">titanic</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, method<span class="op">=</span><span class="st">"RFE"</span>, positive<span class="op">=</span><span class="st">"Yes"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">featsel</span><span class="op">$</span><span class="va">selection.0se</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">featsel</span><span class="op">$</span><span class="va">selection.0se</span></span></code></pre></div>
 <pre><code>[1] "Sex"      "Pclass"   "Age"      "Embarked"</code></pre>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">featsel</span><span class="op">$</span><span class="va">selection.1se</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">featsel</span><span class="op">$</span><span class="va">selection.1se</span></span></code></pre></div>
 <pre><code>[1] "Sex"    "Pclass"</code></pre>
 <p>The algorithm suggests to keep the set of variables, or to eliminate <code>Age</code> and <code>Embarked</code> variables if one is ready to lose some performance (“1 standard error rule”).</p>
 </div>
-<div id="parallelization" class="section level2">
-<h2 class="hasAnchor">
-<a href="#parallelization" class="anchor"></a>Parallelization</h2>
-<p><a href="https://cran.r-project.org/package=moreparty"><code>moreparty</code></a> package provides parallelized versions of <code>cforest</code>, <code>varImp</code> and <code>varImpAUC</code> functions, to save computation time. For example, to parallelize the computation of variable importance :</p>
+<div class="section level2">
+<h2 id="parallelization">Parallelization<a class="anchor" aria-label="anchor" href="#parallelization"></a>
+</h2>
+<p><a href="https://cran.r-project.org/package=moreparty" class="external-link"><code>moreparty</code></a> package provides parallelized versions of <code>cforest</code>, <code>varImp</code> and <code>varImpAUC</code> functions, to save computation time. For example, to parallelize the computation of variable importance :</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">doParallel</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span><span class="op">(</span>cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="../reference/fastvarImpAUC.html">fastvarImpAUC</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">stopImplicitCluster</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/doparallel" class="external-link">doParallel</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span>cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fastvarImpAUC.html">fastvarImpAUC</a></span><span class="op">(</span><span class="va">foret</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">stopImplicitCluster</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This chunk of code works fine with Linux but may have to be adapted for other OS.</p>
 <p>Parallelization is also an option for many of the functions we have used here.</p>
 </div>
@@ -718,11 +714,13 @@ $Yes
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://github.com/nicolas-robette">Nicolas Robette</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://github.com/nicolas-robette" class="external-link">Nicolas Robette</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -730,6 +728,8 @@ $Yes
 
   
 
+
+  
 
   </body>
 </html>

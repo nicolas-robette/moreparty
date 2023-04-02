@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -57,21 +57,26 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">Prototypes</span><span class="op">(</span><span class="va">label</span>, <span class="va">x</span>, <span class="va">prox</span>, nProto <span class="op">=</span> <span class="fl">5</span>, nNbr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">label</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">nProto</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Prototypes</span><span class="op">(</span><span class="va">label</span>, <span class="va">x</span>, <span class="va">prox</span>, nProto <span class="op">=</span> <span class="fl">5</span>, nNbr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">label</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">nProto</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>label</dt>
 <dd><p>the response variable. Should be a factor.</p></dd>
-<dt>x</dt>
+
+  <dt>x</dt>
 <dd><p>matrix or data frame of predictor variables.</p></dd>
-<dt>prox</dt>
+
+  <dt>prox</dt>
 <dd><p>the proximity (or similarity) matrix, assumed to be symmetric with 1 on the diagonal and in [0, 1] off the diagonal (the order of row/column must match that of x)</p></dd>
-<dt>nProto</dt>
+
+  <dt>nProto</dt>
 <dd><p>number of prototypes to compute for each value of the response variables.</p></dd>
-<dt>nNbr</dt>
+
+  <dt>nNbr</dt>
 <dd><p>number of nearest neighbors used to find the prototypes.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -79,7 +84,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of data frames with prototypes. The number of data frames is equal to the number of classes of the response variable.</p>
+    
+
+<p>A list of data frames with prototypes. The number of data frames is equal to the number of classes of the response variable.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -97,27 +104,27 @@ https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm#prototype</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span>
-<span class="r-in">  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>,</span>
-<span class="r-in">            control <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="fl">2</span>, ntree <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">prox</span><span class="op">=</span><span class="fu">proximity</span><span class="op">(</span><span class="va">iris.cf</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">Prototypes</span><span class="op">(</span><span class="va">iris2</span><span class="op">$</span><span class="va">Species</span>,<span class="va">iris2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,<span class="va">prox</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>,</span></span>
+<span class="r-in"><span>            control <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="fl">2</span>, ntree <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">prox</span><span class="op">=</span><span class="fu">proximity</span><span class="op">(</span><span class="va">iris.cf</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">Prototypes</span><span class="op">(</span><span class="va">iris2</span><span class="op">$</span><span class="va">Species</span>,<span class="va">iris2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,<span class="va">prox</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`FALSE`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "6.7"        "2.8"       "5.8"        "1.9"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "4.8"        "3"         "1.4"        "0.2"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] "5.1"        "3.5"       "1.4"        "0.2"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] "5"          "3.4"       "1.4"        "0.2"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] "6.2"        "2.9"       "5.2"        "2.2"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] "6.5"        "3"         "5.8"        "2.2"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] "5.4"        "3.7"       "1.5"        "0.3"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`TRUE`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "6.1"        "2.8"       "4.5"        "1.4"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "5.5"        "2.5"       "4"          "1.3"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] "6"          "2.9"       "4.3"        "1.4"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] "5.9"        "2.8"       "4.2"        "1.3"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "5.5"        "2.4"       "3.7"        "1.1"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "6"          "2.9"       "4.4"        "1.4"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] "6.1"        "2.7"       "4.4"        "1.4"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] "6.1"        "2.4"       "4"          "1.3"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] "6"          "2.9"       "4.5"        "1.4"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
@@ -134,7 +141,7 @@ https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm#prototype</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

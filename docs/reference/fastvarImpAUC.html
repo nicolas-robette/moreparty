@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -59,43 +59,60 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fastvarImpAUC</span><span class="op">(</span><span class="va">object</span>, mincriterion <span class="op">=</span> <span class="fl">0</span>, conditional <span class="op">=</span> <span class="cn">FALSE</span>,
-            threshold <span class="op">=</span> <span class="fl">0.2</span>, nperm <span class="op">=</span> <span class="fl">1</span>, OOB <span class="op">=</span> <span class="cn">TRUE</span>,
-            pre1.0_0 <span class="op">=</span> <span class="va">conditional</span>,
-            parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fastvarImpAUC</span><span class="op">(</span><span class="va">object</span>, mincriterion <span class="op">=</span> <span class="fl">0</span>, conditional <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>            threshold <span class="op">=</span> <span class="fl">0.2</span>, nperm <span class="op">=</span> <span class="fl">1</span>, OOB <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>            pre1.0_0 <span class="op">=</span> <span class="va">conditional</span>,</span>
+<span>            parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>An object as returned by <code>cforest</code> (or <code>fastcforest</code>).</p></dd>
-<dt>mincriterion</dt>
+
+
+  <dt>mincriterion</dt>
 <dd><p>The value of the test statistic or 1 - p-value that must be exceeded in order to include a
     split in the computation of the importance. The default mincriterion = 0 guarantees that all splits are included.</p></dd>
-<dt>conditional</dt>
+
+
+  <dt>conditional</dt>
 <dd><p>The value of the test statistic or 1 - p-value that must be exceeded in order to include a split
     in the computation of the importance. The default mincriterion = 0 guarantees that all splits are included.</p></dd>
-<dt>threshold</dt>
+
+
+  <dt>threshold</dt>
 <dd><p>The threshold value for (1 - p-value) of the association between the variable of interest and a
     covariate, which must be exceeded inorder to include the covariate in the conditioning scheme for the variable of
     interest (only relevant if conditional = TRUE). A threshold value of zero includes all covariates.</p></dd>
-<dt>nperm</dt>
+
+
+  <dt>nperm</dt>
 <dd><p>The number of permutations performed.</p></dd>
-<dt>OOB</dt>
+
+
+  <dt>OOB</dt>
 <dd><p>A logical determining whether the importance is computed from the out-of-bag sample or the learning
     sample (not suggested).</p></dd>
-<dt>pre1.0_0</dt>
+
+
+  <dt>pre1.0_0</dt>
 <dd><p>Prior to party version 1.0-0, the actual data values were permuted according to the original
     permutation importance suggested by Breiman (2001). Now the assignments to child nodes of splits in the variable
     of interest are permuted as described by Hapfelmeier et al. (2012), which allows for missing values in the
     explanatory variables and is more efficient wrt memory consumption and computing time. This method does not
     apply to conditional variable importances.</p></dd>
-<dt>parallel</dt>
+
+
+  <dt>parallel</dt>
 <dd><p>Logical indicating whether or not to run <code>fastvarImpAUC</code> in parallel using a backend provided by the <code>foreach</code> package. Default is <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Vector with computed permutation importance for each variable.</p>
+    
+
+<p>Vector with computed permutation importance for each variable.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -118,12 +135,12 @@ importance measure for random forests. <em>BMC Bioinform.</em> 14, 119 (2013).</
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span>
-<span class="r-in">  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>,</span>
-<span class="r-in">            control <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="fl">2</span>, ntree <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">fastvarImpAUC</span><span class="op">(</span>object <span class="op">=</span> <span class="va">iris.cf</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>,</span></span>
+<span class="r-in"><span>            control <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="fl">2</span>, ntree <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">fastvarImpAUC</span><span class="op">(</span>object <span class="op">=</span> <span class="va">iris.cf</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length  Sepal.Width Petal.Length  Petal.Width </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.04336985   0.09012001   0.31392049   0.21789339 </span>
 </code></pre></div>
@@ -140,7 +157,7 @@ importance measure for random forests. <em>BMC Bioinform.</em> 14, 119 (2013).</
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

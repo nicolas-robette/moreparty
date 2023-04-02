@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -57,15 +57,17 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">EasyTreeVarImp</span><span class="op">(</span><span class="va">ct</span>, nsim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">EasyTreeVarImp</span><span class="op">(</span><span class="va">ct</span>, nsim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ct</dt>
 <dd><p>A tree of class <code>constparty</code> (as returned by <code>ctree</code> from <code>partykit</code> package).</p></dd>
-<dt>nsim</dt>
+
+  <dt>nsim</dt>
 <dd><p>Integer specifying the number of Monte Carlo replications to perform. Default is 1. If nsim &gt; 1, the results from each replication are simply averaged together.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -73,7 +75,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of variable importances, with variables as rows and performance measures as columns.</p>
+    
+
+<p>A data frame of variable importances, with variables as rows and performance measures as columns.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -91,16 +95,16 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span>
-<span class="r-in">  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris.ct</span> <span class="op">=</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/ctree.html" class="external-link">ctree</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">EasyTreeVarImp</span><span class="op">(</span><span class="va">iris.ct</span>, nsim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris.ct</span> <span class="op">=</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/ctree.html" class="external-link">ctree</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">EasyTreeVarImp</span><span class="op">(</span><span class="va">iris.ct</span>, nsim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Variable   AUC accuracy balanced accuracy Species.FALSE Species.TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Sepal.Length 0.000    0.000             0.000          0.00         0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Sepal.Width 0.294    0.240             0.215          0.13         0.40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Sepal.Width 0.232    0.200             0.235          0.19         0.30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 Petal.Length 0.000    0.000             0.000          0.00         0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Petal.Width 0.340    0.127             0.130          0.08         0.24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Petal.Width 0.261    0.127             0.120          0.12         0.16</span>
 </code></pre></div>
     </div>
   </div>
@@ -115,7 +119,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

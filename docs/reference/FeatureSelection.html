@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -57,33 +57,52 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">FeatureSelection</span><span class="op">(</span><span class="va">Y</span>, <span class="va">X</span>, method <span class="op">=</span> <span class="st">'NRFE'</span>, ntree <span class="op">=</span> <span class="fl">1000</span>, measure <span class="op">=</span> <span class="cn">NULL</span>,
-                 nperm <span class="op">=</span> <span class="fl">30</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, distrib <span class="op">=</span> <span class="st">'approx'</span>,
-                 parallel <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">FeatureSelection</span><span class="op">(</span><span class="va">Y</span>, <span class="va">X</span>, method <span class="op">=</span> <span class="st">'NRFE'</span>, ntree <span class="op">=</span> <span class="fl">1000</span>, measure <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                 nperm <span class="op">=</span> <span class="fl">30</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, distrib <span class="op">=</span> <span class="st">'approx'</span>,</span>
+<span>                 parallel <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Y</dt>
 <dd><p>response vector. Must be of class <code>factor</code> or <code>numeric</code></p></dd>
-<dt>X</dt>
+
+
+  <dt>X</dt>
 <dd><p>matrix or data frame containing the predictors</p></dd>
-<dt>method</dt>
+
+
+  <dt>method</dt>
 <dd><p>method for feature selection. Should be 'NRFE' (non-recursive feature elimination, default), 'RFE' (recursive feature elimination), 'ALT' (permutation of response) or 'HAPF' (permutation of predictors)</p></dd>
-<dt>ntree</dt>
+
+
+  <dt>ntree</dt>
 <dd><p>number of trees contained in a forest</p></dd>
-<dt>measure</dt>
+
+
+  <dt>measure</dt>
 <dd><p>the name of the measure of the <code>measures</code> package that should be used for error and variable importance calculations.</p></dd>
-<dt>nperm</dt>
+
+  
+  <dt>nperm</dt>
 <dd><p>number of permutations. Only for 'ALT' and 'HAPF' methods.</p></dd>
-<dt>alpha</dt>
+
+  
+  <dt>alpha</dt>
 <dd><p>alpha level for permutation tests. Only for 'ALT' and 'HAPF' methods.</p></dd>
-<dt>distrib</dt>
+
+  
+  <dt>distrib</dt>
 <dd><p>the null distribution of the variable importance can be approximated by its asymptotic distribution (<code>"asympt"</code>) or via Monte Carlo resampling (<code>"approx"</code>, default). Only for 'ALT' and 'HAPF' methods.</p></dd>
-<dt>parallel</dt>
+
+  
+  <dt>parallel</dt>
 <dd><p>Logical indicating whether or not to run <code>fastvarImp</code> in parallel using a backend provided by the <code>foreach</code> package. Default is <code>FALSE</code>.</p></dd>
-<dt>...</dt>
+
+  
+  <dt>...</dt>
 <dd><p>Further arguments (like positive or negative class) that are needed by the measure.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -92,19 +111,27 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list with the following elements :</p>
+    
+
+<p>A list with the following elements :</p>
 <dl><dt>selection.0se</dt>
 <dd><p>selected variables with the 0 standard error rule</p></dd>
+
 <dt>forest.0se</dt>
 <dd><p>forest corresponding the variables selected with the 0 standard error rule</p></dd>
+
 <dt>oob.error.0se</dt>
 <dd><p>OOB error of the forest with 0 standard error rule</p></dd>
+
 <dt>selection.1se</dt>
 <dd><p>selected variables with the 1 standard error rule</p></dd>
+
 <dt>forest.1se</dt>
 <dd><p>forest corresponding the variables selected with the 1 standard error rule</p></dd>
+
 <dt>oob.error.1se</dt>
 <dd><p>OOB error of the forest with 1 standard error rule</p></dd>
+
 </dl></div>
     <div id="references">
     <h2>References</h2>
@@ -124,15 +151,15 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span>
-<span class="r-in">  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">featsel</span> <span class="op">&lt;-</span> <span class="fu">FeatureSelection</span><span class="op">(</span><span class="va">iris2</span><span class="op">$</span><span class="va">Species</span>, <span class="va">iris2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, measure<span class="op">=</span><span class="st">'ACC'</span>, ntree<span class="op">=</span><span class="fl">200</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">featsel</span> <span class="op">&lt;-</span> <span class="fu">FeatureSelection</span><span class="op">(</span><span class="va">iris2</span><span class="op">$</span><span class="va">Species</span>, <span class="va">iris2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, measure<span class="op">=</span><span class="st">'ACC'</span>, ntree<span class="op">=</span><span class="fl">200</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "initial step"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "final step"</span>
-<span class="r-in">  <span class="va">featsel</span><span class="op">$</span><span class="va">selection.0se</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Petal.Length"</span>
-<span class="r-in">  <span class="va">featsel</span><span class="op">$</span><span class="va">selection.1se</span></span>
+<span class="r-in"><span>  <span class="va">featsel</span><span class="op">$</span><span class="va">selection.0se</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Petal.Length" "Petal.Width"  "Sepal.Width" </span>
+<span class="r-in"><span>  <span class="va">featsel</span><span class="op">$</span><span class="va">selection.1se</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Petal.Length"</span>
 </code></pre></div>
     </div>
@@ -148,7 +175,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

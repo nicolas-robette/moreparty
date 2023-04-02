@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -57,40 +57,53 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">GetPartialData</span><span class="op">(</span><span class="va">object</span>, xnames<span class="op">=</span><span class="cn">NULL</span>, ice <span class="op">=</span> <span class="cn">FALSE</span>, center <span class="op">=</span> <span class="cn">FALSE</span>,
-               grid.resolution <span class="op">=</span> <span class="cn">NULL</span>, quantiles <span class="op">=</span> <span class="cn">TRUE</span>, probs <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">/</span><span class="fl">10</span>,
-               trim.outliers <span class="op">=</span> <span class="cn">FALSE</span>, which.class <span class="op">=</span> <span class="fl">1L</span>, prob <span class="op">=</span> <span class="cn">TRUE</span>,
-               pred.fun <span class="op">=</span> <span class="cn">NULL</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span>, paropts <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">GetPartialData</span><span class="op">(</span><span class="va">object</span>, xnames<span class="op">=</span><span class="cn">NULL</span>, ice <span class="op">=</span> <span class="cn">FALSE</span>, center <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>               grid.resolution <span class="op">=</span> <span class="cn">NULL</span>, quantiles <span class="op">=</span> <span class="cn">TRUE</span>, probs <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">/</span><span class="fl">10</span>,</span>
+<span>               trim.outliers <span class="op">=</span> <span class="cn">FALSE</span>, which.class <span class="op">=</span> <span class="fl">1L</span>, prob <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>               pred.fun <span class="op">=</span> <span class="cn">NULL</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span>, paropts <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>An object as returned by <code>cforest</code> (or <code><a href="fastcforest.html">fastcforest</a></code>).</p></dd>
-<dt>xnames</dt>
+
+  <dt>xnames</dt>
 <dd><p>A character vector of the covariates for which to compute the partial dependence. If NULL (default), partial dependence is computed for all the covariates in the model.</p></dd>
-<dt>ice</dt>
+
+  <dt>ice</dt>
 <dd><p>Logical indicating whether or not to compute individual conditional expectation (ICE) curves. Default is FALSE. See Goldstein et al. (2014) for details.</p></dd>
-<dt>center</dt>
+
+  <dt>center</dt>
 <dd><p>Logical indicating whether or not to produce centered ICE curves (c-ICE curves). Only used when ice = TRUE. Default is FALSE. See Goldstein et al. (2014) for details.</p></dd>
-<dt>grid.resolution</dt>
+
+  <dt>grid.resolution</dt>
 <dd><p>Integer giving the number of equally spaced points to use for the continuous variables listed in <code>xnames</code>. If left NULL, it will default to the minimum between 51 and the number of unique data points for each of the continuous independent variables listed in <code>xnames</code>.</p></dd>
-<dt>quantiles</dt>
+
+  <dt>quantiles</dt>
 <dd><p>Logical indicating whether or not to use the sample quantiles of the continuous predictors listed in <code>xnames</code>. If <code>quantiles = TRUE</code> and <code>grid.resolution = NULL</code> (default), the sample quantiles will be used to generate the grid of joint values for which the partial dependence is computed.</p></dd>
-<dt>probs</dt>
+
+  <dt>probs</dt>
 <dd><p>Numeric vector of probabilities with values in [0,1]. (Values up to 2e-14 outside that range are accepted and moved to the nearby endpoint.) Default is <code>1:9/10</code> which corresponds to the deciles of the predictor variables. These specify which quantiles to use for the continuous predictors listed in <code>xnames</code> when <code>quantiles = TRUE</code>.</p></dd>
-<dt>trim.outliers</dt>
+
+  <dt>trim.outliers</dt>
 <dd><p>Logical indicating whether or not to trim off outliers from the continuous predictors listed in <code>xnames</code> (using the simple boxplot method) before generating the grid of joint values for which the partial dependence is computed. Default is FALSE.</p></dd>
-<dt>which.class</dt>
+
+  <dt>which.class</dt>
 <dd><p>Integer specifying which column of the matrix of predicted probabilities to use as the "focus" class. Default is to use the first class. Only used for classification problems.</p></dd>
-<dt>prob</dt>
+
+  <dt>prob</dt>
 <dd><p>Logical indicating whether or not partial dependence for classification problems should be returned on the probability scale, rather than the centered logit. If FALSE, the partial dependence function is on a scale similar to the logit. Default is TRUE.</p></dd>
-<dt>pred.fun</dt>
+
+  <dt>pred.fun</dt>
 <dd><p>Optional prediction function that requires two arguments: <code>object</code> and <code>newdata</code>. If specified, then the function must return a single prediction or a vector of predictions (i.e., not a matrix or data frame). Default is NULL.</p></dd>
-<dt>parallel</dt>
+
+  <dt>parallel</dt>
 <dd><p>Logical indicating whether or not to run <code>partial</code> in parallel using a backend provided by the <code>foreach</code> package. Default is FALSE.</p></dd>
-<dt>paropts</dt>
+
+  <dt>paropts</dt>
 <dd><p>List containing additional options to be passed onto <code>foreach</code> when <code>parallel = TRUE</code>.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -98,7 +111,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame with covariates, their categories and their partial dependence effects.</p>
+    
+
+<p>A data frame with covariates, their categories and their partial dependence effects.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -116,49 +131,49 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span>
-<span class="r-in">  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>, </span>
-<span class="r-in">              controls <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">2</span>, ntree<span class="op">=</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">GetPartialData</span><span class="op">(</span><span class="va">iris.cf</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>, </span></span>
+<span class="r-in"><span>              controls <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">2</span>, ntree<span class="op">=</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">GetPartialData</span><span class="op">(</span><span class="va">iris.cf</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             var  cat     value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Sepal.Length  4.8 0.6805177</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Sepal.Length    5 0.6735210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  Sepal.Length 5.27 0.6479276</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Sepal.Length  5.6 0.6081915</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Sepal.Length  5.8 0.6138685</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  Sepal.Length  6.1 0.6164836</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Sepal.Length  6.3 0.6303832</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  Sepal.Length 6.52 0.6318896</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  Sepal.Length  6.9 0.6396884</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  Sepal.Width  2.5 0.5261335</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  Sepal.Width  2.7 0.5261335</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  Sepal.Width  2.8 0.5281537</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  Sepal.Width    3 0.6479506</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  Sepal.Width    3 0.6479506</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  Sepal.Width  3.1 0.6632897</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  Sepal.Width  3.2 0.6900505</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  Sepal.Width  3.4 0.7398838</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  Sepal.Width 3.61 0.7523306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19 Petal.Length  1.4 0.7449194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 Petal.Length  1.5 0.7449194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21 Petal.Length  1.7 0.7152613</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22 Petal.Length  3.9 0.3965971</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23 Petal.Length 4.35 0.3934531</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24 Petal.Length 4.64 0.4253749</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25 Petal.Length    5 0.6268954</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26 Petal.Length 5.32 0.6768020</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27 Petal.Length  5.8 0.6768020</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  Petal.Width  0.2 0.5769098</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  Petal.Width  0.2 0.5769098</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  Petal.Width  0.4 0.5724076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31  Petal.Width 1.16 0.4872607</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  Petal.Width  1.3 0.4876001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  Petal.Width  1.5 0.5348852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  Petal.Width  1.8 0.8015669</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35  Petal.Width  1.9 0.8087850</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36  Petal.Width  2.2 0.8092917</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Sepal.Length  4.8 0.6850646</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Sepal.Length    5 0.6850646</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  Sepal.Length 5.27 0.6627051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Sepal.Length  5.6 0.6307726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Sepal.Length  5.8 0.6344228</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  Sepal.Length  6.1 0.6375550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Sepal.Length  6.3 0.6466282</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  Sepal.Length 6.52 0.6448453</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  Sepal.Length  6.9 0.6461737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  Sepal.Width  2.5 0.5644400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  Sepal.Width  2.7 0.5634933</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  Sepal.Width  2.8 0.5835377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  Sepal.Width    3 0.6506588</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  Sepal.Width    3 0.6506588</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  Sepal.Width  3.1 0.6708847</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  Sepal.Width  3.2 0.6897350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  Sepal.Width  3.4 0.7416776</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  Sepal.Width 3.61 0.7437829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19 Petal.Length  1.4 0.8015570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20 Petal.Length  1.5 0.8015570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21 Petal.Length  1.7 0.7880147</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22 Petal.Length  3.9 0.3757652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23 Petal.Length 4.35 0.3818838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24 Petal.Length 4.64 0.4171021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25 Petal.Length    5 0.6364779</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26 Petal.Length 5.32 0.7312280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27 Petal.Length  5.8 0.7321233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  Petal.Width  0.2 0.6260500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  Petal.Width  0.2 0.6260500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  Petal.Width  0.4 0.6222924</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  Petal.Width 1.16 0.4804525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  Petal.Width  1.3 0.4815382</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  Petal.Width  1.5 0.4988485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  Petal.Width  1.8 0.7918835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  Petal.Width  1.9 0.8082797</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  Petal.Width  2.2 0.8082797</span>
 </code></pre></div>
     </div>
   </div>
@@ -173,7 +188,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

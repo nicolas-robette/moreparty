@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -57,21 +57,26 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggForestEffects</span><span class="op">(</span><span class="va">dt</span>, vline<span class="op">=</span><span class="fl">0</span>, xlabel<span class="op">=</span><span class="st">""</span>, ylabel<span class="op">=</span><span class="st">""</span>, main<span class="op">=</span><span class="st">""</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggForestEffects</span><span class="op">(</span><span class="va">dt</span>, vline<span class="op">=</span><span class="fl">0</span>, xlabel<span class="op">=</span><span class="st">""</span>, ylabel<span class="op">=</span><span class="st">""</span>, main<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dt</dt>
 <dd><p>data frame. Must have three columns : one with the names of the covariates (named "var"), one with the names of the categories of the covariates (named "cat"), one with the values of the effects (named "value"). Typically the result of GetAleData or GetPartialData functions.</p></dd>
-<dt>vline</dt>
+
+  <dt>vline</dt>
 <dd><p>numeric. Coordinate on the x axis where a vertical line is added.</p></dd>
-<dt>xlabel</dt>
+
+  <dt>xlabel</dt>
 <dd><p>character. Title of the x axis.</p></dd>
-<dt>ylabel</dt>
+
+  <dt>ylabel</dt>
 <dd><p>character. Title of the y axis.</p></dd>
-<dt>main</dt>
+
+  <dt>main</dt>
 <dd><p>character. Title of the plot.</p></dd>
+
 </dl></div>
     <div id="note">
     <h2>Note</h2>
@@ -94,13 +99,13 @@ https://christophm.github.io/interpretable-ml-book/.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span>
-<span class="r-in">  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>, controls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">ale</span> <span class="op">&lt;-</span> <span class="fu"><a href="GetAleData.html">GetAleData</a></span><span class="op">(</span><span class="va">iris.cf</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">ale</span><span class="op">$</span><span class="va">cat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">ale</span><span class="op">$</span><span class="va">var</span>,<span class="va">ale</span><span class="op">$</span><span class="va">cat</span>,sep<span class="op">=</span><span class="st">'_'</span><span class="op">)</span>  <span class="co"># to avoid duplicated categories</span></span>
-<span class="r-in">  <span class="fu">ggForestEffects</span><span class="op">(</span><span class="va">ale</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>, controls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ale</span> <span class="op">&lt;-</span> <span class="fu"><a href="GetAleData.html">GetAleData</a></span><span class="op">(</span><span class="va">iris.cf</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ale</span><span class="op">$</span><span class="va">cat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">ale</span><span class="op">$</span><span class="va">var</span>,<span class="va">ale</span><span class="op">$</span><span class="va">cat</span>,sep<span class="op">=</span><span class="st">'_'</span><span class="op">)</span>  <span class="co"># to avoid duplicated categories</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggForestEffects</span><span class="op">(</span><span class="va">ale</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggForestEffects-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -116,7 +121,7 @@ https://christophm.github.io/interpretable-ml-book/.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

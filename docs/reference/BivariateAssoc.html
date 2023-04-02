@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -57,17 +57,22 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">BivariateAssoc</span><span class="op">(</span><span class="va">Y</span>, <span class="va">X</span>, xx <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">BivariateAssoc</span><span class="op">(</span><span class="va">Y</span>, <span class="va">X</span>, xx <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Y</dt>
 <dd><p>the response variable</p></dd>
-<dt>X</dt>
+
+
+  <dt>X</dt>
 <dd><p>the predictor variables</p></dd>
-<dt>xx</dt>
+
+
+  <dt>xx</dt>
 <dd><p>whether the association measures should be computed for couples of predictor variables (default) or not. With a lot of predictors, consider setting xx to FALSE (for reasons of computation time).</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -75,20 +80,28 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of the following items :</p>
+    
+
+<p>A list of the following items :</p>
 <dl><dt>YX</dt>
 <dd><p>: a table with the association measures between the response and predictor variables</p></dd>
+
 <dt>XX</dt>
 <dd><p>: a table with the association measures between every couples of predictor variables</p></dd>
+
 </dl><p>In each table :</p>
 <dl><dt>measure</dt>
 <dd><p>: name of the "standard" association measure</p></dd>
+
 <dt>assoc</dt>
 <dd><p>: value of the "standard" association measure</p></dd>
+
 <dt>p.value</dt>
 <dd><p>: p-value from the permutation test</p></dd>
+
 <dt>criterion</dt>
 <dd><p>: p-value from the permutation test transformed as -log(1-p), which serves to sort rows</p></dd>
+
 </dl></div>
     <div id="references">
     <h2>References</h2>
@@ -110,10 +123,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span>
-<span class="r-in">  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">BivariateAssoc</span><span class="op">(</span><span class="va">iris2</span><span class="op">$</span><span class="va">Species</span>,<span class="va">iris2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span></span>
+<span class="r-in"><span>  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">BivariateAssoc</span><span class="op">(</span><span class="va">iris2</span><span class="op">$</span><span class="va">Species</span>,<span class="va">iris2</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $YX</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       variable measure assoc p.value    criterion</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  Sepal.Width    eta2 0.213 0.00000 0.0000000454</span>
@@ -144,7 +157,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

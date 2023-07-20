@@ -15,7 +15,7 @@ EasyTreeVarImp <- function(ct, nsim = 1) {
                   sort = FALSE,
                   train = X[complete.cases(XY),], 
                   target = Y[complete.cases(XY)],
-                  metric = "r2",
+                  metric = "rsq",
                   pred_wrapper = function(object,newdata) {predict(object,newdata)})
     tau <- vip::vi(ct, 
                    method = "permute",
@@ -23,7 +23,7 @@ EasyTreeVarImp <- function(ct, nsim = 1) {
                    sort = FALSE,
                    train = X[complete.cases(XY),], 
                    target = Y[complete.cases(XY)],
-                   metric = function(actual,predicted) {cor(actual,predicted,method="kendall")},
+                   metric = function(truth, estimate) {cor(truth, estimate, method="kendall")},
                    smaller_is_better = FALSE,
                    pred_wrapper = function(object,newdata) {predict(object,newdata)})
     imp_tot <- data.frame(Variable = r2$Variable, r2 = round(r2$Importance,3), tau = round(tau$Importance,3))
@@ -46,10 +46,12 @@ EasyTreeVarImp <- function(ct, nsim = 1) {
                    sort = FALSE,
                    train = X[complete.cases(XY),], 
                    target = Y[complete.cases(XY)],
-                   metric = function(actual, predicted) {
-                     mat <- table(actual, predicted)
-                     return(mean(diag(mat)/rowSums(mat)))
-                   },
+                   # metric = function(truth, estimate) {
+                   #   mat <- table(truth, estimate)
+                   #   return(mean(diag(mat)/rowSums(mat)))
+                   # },
+                   # metric = yardstick::bal_accuracy_vec,
+                   metric = "bal_accuracy",
                    smaller_is_better = FALSE,
                    pred_wrapper = function(object,newdata) {predict(object,newdata)})
     tr <- list()
@@ -60,8 +62,8 @@ EasyTreeVarImp <- function(ct, nsim = 1) {
                          sort = FALSE,
                          train = X[complete.cases(XY),], 
                          target = Y[complete.cases(XY)],
-                         metric = function(actual, predicted) {
-                           mat <- table(actual, predicted)
+                         metric = function(truth, estimate) {
+                           mat <- table(truth, estimate)
                            return(diag(mat)[i]/rowSums(mat)[i])
                          },
                          smaller_is_better = FALSE,
@@ -77,8 +79,8 @@ EasyTreeVarImp <- function(ct, nsim = 1) {
                      sort = FALSE,
                      train = X[complete.cases(XY),], 
                      target = Y[complete.cases(XY)],
-                     metric = "auc",
-                     reference_class = levels(Y)[2],
+                     metric = "roc_auc",
+                     event_level = "second",
                      smaller_is_better = FALSE,
                      pred_wrapper = function(object,newdata) {predict(object,newdata,type="prob")[,levels(Y)[2]]})
     }
@@ -89,12 +91,16 @@ EasyTreeVarImp <- function(ct, nsim = 1) {
                      sort = FALSE,
                      train = X[complete.cases(XY),], 
                      target = Y[complete.cases(XY)],
-                     metric = "mauc",
+                     # metric = "mauc",
+                     metric = function(truth, estimate) {
+                       as.numeric(pROC::multiclass.roc(truth, estimate)$auc)
+                     },
                      smaller_is_better = FALSE,
                      pred_wrapper = function(object,newdata) {predict(object,newdata,type="prob")})
     }
     imp_tot <- data.frame(Variable = acc$Variable, auc = round(auc$Importance,3), acc = round(acc$Importance,3), bac = round(bac$Importance,3), tr)
     colnames(imp_tot)[2:4] <- c("AUC","accuracy","balanced accuracy")
   }
+  rownames(imp_tot) <- NULL
   return(imp_tot)
 }

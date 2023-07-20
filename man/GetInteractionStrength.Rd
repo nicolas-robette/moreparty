@@ -15,7 +15,7 @@ GetInteractionStrength(object, xnames=NULL)
 }
 
 \note{
-This function calls \code{\link{vint}} function in \code{\link{vip}} package for each interaction. The results are then gathered and reshaped into a friendly data frame format.
+This function calls \code{vint} function from an old version of \code{\link{vip}} package for each interaction. The results are then gathered and reshaped into a friendly data frame format.
 }
 
 \value{

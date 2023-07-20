@@ -46,12 +46,12 @@ EasyTreeVarImp <- function(ct, nsim = 1) {
                    sort = FALSE,
                    train = X[complete.cases(XY),], 
                    target = Y[complete.cases(XY)],
-                   # metric = function(truth, estimate) {
-                   #   mat <- table(truth, estimate)
-                   #   return(mean(diag(mat)/rowSums(mat)))
-                   # },
+                   metric = function(truth, estimate) {
+                     mat <- table(truth, estimate)
+                     return(mean(diag(mat)/rowSums(mat)))
+                   },
                    # metric = yardstick::bal_accuracy_vec,
-                   metric = "bal_accuracy",
+                   # metric = "bal_accuracy",
                    smaller_is_better = FALSE,
                    pred_wrapper = function(object,newdata) {predict(object,newdata)})
     tr <- list()

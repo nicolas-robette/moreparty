@@ -164,46 +164,32 @@ other.</p>
 $bylevel
 $bylevel$No
 $bylevel$No$categories
-             categories pct.ycat.in.xcat pct.xcat.in.ycat pct.xcat.global
-2              Sex.male            0.809            0.843           0.644
-3            Pclass.3rd            0.745            0.653           0.542
-6  Embarked.Southampton            0.667            0.754           0.698
-8    Embarked.Cherbourg            0.444            0.148           0.206
-9            Pclass.1st            0.381            0.152           0.247
-11           Sex.female            0.273            0.157           0.356
-      phi
-2   0.529
-3   0.283
-6   0.155
-8  -0.182
-9  -0.279
-11 -0.529
+            categories freq pct.y.in.x pct.x.in.y overall.pct.x    phi
+1             Sex.male  682       80.9       84.3          64.4  0.529
+2           Pclass.3rd  528       74.5       65.3          54.2  0.283
+3 Embarked.Southampton  610       66.7       75.4          69.8  0.155
+4   Embarked.Cherbourg  120       44.4       14.8          20.6 -0.182
+5           Pclass.1st  123       38.1       15.2          24.7 -0.279
+6           Sex.female  127       27.3       15.7          35.6 -0.529
 
 $bylevel$No$continuous.var
-  variables mean.x.in.ycat mean.x.global sd.x.in.ycat sd.x.global   cor
-1       Age           30.5          29.9         13.9        14.4 0.056
+  variables mean.in.category overall.mean sd.in.category overall.sd correlation
+1       Age            30.55        29.88          13.91      14.41       0.056
 
 
 $bylevel$Yes
 $bylevel$Yes$categories
-             categories pct.ycat.in.xcat pct.xcat.in.ycat pct.xcat.global
-1            Sex.female            0.727            0.678           0.356
-4            Pclass.1st            0.619            0.400           0.247
-5    Embarked.Cherbourg            0.556            0.300           0.206
-7  Embarked.Southampton            0.333            0.608           0.698
-10           Pclass.3rd            0.255            0.362           0.542
-12             Sex.male            0.191            0.322           0.644
-      phi
-1   0.529
-4   0.279
-5   0.182
-7  -0.155
-10 -0.283
-12 -0.529
+            categories freq pct.y.in.x pct.x.in.y overall.pct.x    phi
+1           Sex.female  339       72.7       67.8          35.6  0.529
+2           Pclass.1st  200       61.9       40.0          24.7  0.279
+3   Embarked.Cherbourg  150       55.6       30.0          20.6  0.182
+4 Embarked.Southampton  304       33.3       60.8          69.8 -0.155
+5           Pclass.3rd  181       25.5       36.2          54.2 -0.283
+6             Sex.male  161       19.1       32.2          64.4 -0.529
 
 $bylevel$Yes$continuous.var
-  variables mean.x.in.ycat mean.x.global sd.x.in.ycat sd.x.global    cor
-2       Age           28.9          29.9           15        14.4 -0.056</code></pre>
+  variables mean.in.category overall.mean sd.in.category overall.sd correlation
+1       Age            28.92        29.88          15.04      14.41      -0.056</code></pre>
 <p>Women, first class passengers and those who boarded at Cherbourg are
 over-represented among the survivors. Men, 3rd class passengers and
 those who boarded at Southampton are over-represented among the

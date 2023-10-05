@@ -1,3 +1,8 @@
+# moreparty 0.3.3 [CRAN]
+
+* dependency to 0.4.1 version of `vip` package 
+
+
 # moreparty 0.3.2 [CRAN]
 
 * bug fixes due to change in `vip` package

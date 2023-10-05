@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
       </span>
     </div>
 
@@ -105,84 +105,14 @@ https://christophm.github.io/interpretable-ml-book/.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">iris2</span> <span class="op">=</span> <span class="va">iris</span></span></span>
 <span class="r-in"><span>  <span class="va">iris2</span><span class="op">$</span><span class="va">Species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">iris.cf</span> <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">iris2</span>, </span></span>
 <span class="r-in"><span>              controls <span class="op">=</span> <span class="fu">party</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">2</span>, ntree<span class="op">=</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">GetAleData</span><span class="op">(</span><span class="va">iris.cf</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             var cat        value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Sepal.Length 4.3 -0.012062108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Sepal.Length 4.6 -0.012062108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  Sepal.Length 4.8 -0.012062108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Sepal.Length   5 -0.012062108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Sepal.Length 5.1 -0.008870796</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  Sepal.Length 5.3  0.004272061</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Sepal.Length 5.5  0.021638168</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  Sepal.Length 5.6  0.035760463</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  Sepal.Length 5.7  0.037086220</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 Sepal.Length 5.8  0.028956350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 Sepal.Length 5.9  0.030524978</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 Sepal.Length 6.1  0.025101697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 Sepal.Length 6.2  0.019863602</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 Sepal.Length 6.3 -0.009647093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 Sepal.Length 6.4 -0.013694712</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 Sepal.Length 6.5 -0.020361379</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 Sepal.Length 6.7 -0.020361379</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 Sepal.Length 6.9 -0.026000477</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19 Sepal.Length 7.3 -0.031963440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 Sepal.Length 7.9 -0.031963440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21  Sepal.Width   2  0.059043249</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22  Sepal.Width 2.3  0.059043249</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23  Sepal.Width 2.5  0.043168578</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24  Sepal.Width 2.6  0.041457467</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25  Sepal.Width 2.7  0.037423279</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26  Sepal.Width 2.8  0.042582009</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27  Sepal.Width 2.9  0.044400191</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  Sepal.Width   3 -0.008641172</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  Sepal.Width 3.1 -0.021245496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  Sepal.Width 3.2 -0.022089468</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31  Sepal.Width 3.3 -0.049217525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  Sepal.Width 3.4 -0.064373377</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  Sepal.Width 3.5 -0.069373377</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  Sepal.Width 3.6 -0.069373377</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35  Sepal.Width 3.8 -0.069373377</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36  Sepal.Width 4.4 -0.069373377</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37 Petal.Length   1 -0.182109809</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38 Petal.Length 1.3 -0.182109809</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39 Petal.Length 1.4 -0.182109809</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40 Petal.Length 1.5 -0.182109809</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41 Petal.Length 1.6 -0.168538381</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42 Petal.Length 1.7 -0.159887587</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43 Petal.Length 3.3  0.231203255</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44 Petal.Length 3.9  0.231203255</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45 Petal.Length 4.1  0.240622898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46 Petal.Length 4.3  0.237706232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47 Petal.Length 4.5  0.235206232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48 Petal.Length 4.7  0.195339709</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49 Petal.Length 4.8  0.115511336</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50 Petal.Length   5  0.030648088</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51 Petal.Length 5.1 -0.053865801</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52 Petal.Length 5.3 -0.073953102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53 Petal.Length 5.6 -0.073953102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54 Petal.Length 5.8 -0.073953102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55 Petal.Length 6.1 -0.073953102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56 Petal.Length 6.9 -0.073953102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57  Petal.Width 0.1  0.037168244</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58  Petal.Width 0.2  0.037168244</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59  Petal.Width 0.3  0.037168244</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60  Petal.Width 0.4  0.038986425</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61  Petal.Width   1  0.185924376</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62  Petal.Width 1.1  0.195015285</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63  Petal.Width 1.3  0.204558936</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64  Petal.Width 1.4  0.179257015</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65  Petal.Width 1.5  0.155299389</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66  Petal.Width 1.8 -0.261416562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67  Petal.Width 1.9 -0.282670530</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68  Petal.Width 2.1 -0.282670530</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69  Petal.Width 2.2 -0.282670530</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70  Petal.Width 2.3 -0.282670530</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71  Petal.Width 2.5 -0.282670530</span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

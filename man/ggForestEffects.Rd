@@ -37,6 +37,7 @@ https://christophm.github.io/interpretable-ml-book/.
 }
 
 \examples{
+  \dontrun{
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species == "versicolor")
@@ -44,7 +45,7 @@ https://christophm.github.io/interpretable-ml-book/.
   ale <- GetAleData(iris.cf)
   ale$cat <- paste(ale$var,ale$cat,sep='_')  # to avoid duplicated categories
   ggForestEffects(ale)
-}
+}}
 
 \keyword{ aplot }
 \keyword{ tree }

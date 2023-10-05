@@ -40,12 +40,13 @@ https://christophm.github.io/interpretable-ml-book/.}
 }
 
 \examples{
+  \dontrun{
   data(iris)
   iris2 = iris
   iris2$Species = factor(iris$Species == "versicolor")
   iris.cf = party::cforest(Species ~ ., data = iris2, 
               controls = party::cforest_unbiased(mtry=2, ntree=50))
   GetAleData(iris.cf)
-}
+}}
 
 \keyword{tree}

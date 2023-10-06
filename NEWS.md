@@ -1,3 +1,10 @@
+# moreparty 0.4
+
+## New function
+
+* `NodeTreePlot()`: plots the results of each node of a conditional inference tree
+
+
 # moreparty 0.3.3 [CRAN]
 
 * dependency to 0.4.1 version of `vip` package 

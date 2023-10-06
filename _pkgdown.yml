@@ -32,6 +32,7 @@ reference:
   - EasyTreeVarImp
   - GetSplitStats
   - NiceTreePlot
+  - NodeTreePlot
   - ctree-module
   - ictree
 

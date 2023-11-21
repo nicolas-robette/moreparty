@@ -8,12 +8,14 @@ Plots conditional inference trees.
 Plots a \code{partykit} conditional inference tree in a pretty and simple way.
 }
 \usage{
-NiceTreePlot(ct, inner_plots = FALSE)
+NiceTreePlot(ct, inner_plots = FALSE, cex = 0.8, justmin = 15)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ct}{A tree of class \code{constparty} (as returned by \code{ctree} from \code{partykit} package).}
   \item{inner_plots}{Logical. If TRUE, plots are displayed at each inner node. Default is FALSE.}
+  \item{cex}{Numerical value. Multiplier applied to fontsize. Default is 0.8.}
+  \item{justmin}{Numerical value. Minimum average edge label length to employ justification (see \code{panelfunctions} documentation from \code{partykit} package)}
 }
 
 \references{

@@ -1,6 +1,6 @@
 #' @export
 
-NiceTreePlot <- function(ct, inner_plots = FALSE) {
+NiceTreePlot <- function(ct, inner_plots = FALSE, cex = 0.8, justmin = 15) {
   
   Y <- ct[[1]]$fitted[,"(response)"]
   
@@ -12,31 +12,31 @@ NiceTreePlot <- function(ct, inner_plots = FALSE) {
     plot(ct,
          inner_panel = partykit::node_inner(ct, id = FALSE, pval = FALSE),
          terminal_panel = partykit::node_barplot(ct, id = FALSE, beside = TRUE),
-         gp = grid::gpar(cex=0.8),
-         ep_args = list(justmin = 15))
+         gp = grid::gpar(cex=cex),
+         ep_args = list(justmin = justmin))
   }
   
   if(inner_plots & is.factor(Y)) {
     plot(ct,
          inner_panel = partykit::node_barplot(ct, mainlab = getvar, id = FALSE, beside = TRUE, gp = grid::gpar(cex=0.7)),
          terminal_panel = partykit::node_barplot(ct, id = FALSE, beside = TRUE),
-         gp = grid::gpar(cex = 0.8),
-         ep_args = list(justmin = 15))
+         gp = grid::gpar(cex = cex),
+         ep_args = list(justmin = justmin))
   }
   
   if(!inner_plots & is.numeric(Y)) {
     plot(ct,
          inner_panel = partykit::node_inner(ct, id = FALSE, pval = FALSE),
          terminal_panel = partykit::node_boxplot(ct, id = FALSE),
-         gp = grid::gpar(cex = 0.8),
-         ep_args = list(justmin = 15))
+         gp = grid::gpar(cex = cex),
+         ep_args = list(justmin = justmin))
   }
   
   if(inner_plots & is.numeric(Y)) {
     plot(ct,
          inner_panel = partykit::node_boxplot(ct, mainlab = getvar, id = FALSE, gp = grid::gpar(cex = 0.7)),
          terminal_panel=partykit::node_boxplot(ct, id = FALSE),
-         gp = grid::gpar(cex = 0.8),
-         ep_args = list(justmin = 15))
+         gp = grid::gpar(cex = cex),
+         ep_args = list(justmin = justmin))
   }
 }

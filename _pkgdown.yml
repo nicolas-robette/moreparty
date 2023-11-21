@@ -41,6 +41,8 @@ reference:
   - GetCtree
   - FeatureSelection
   - BivariateAssoc
+  - PerfsRegression
+  - PerfsBinClassif
   
 - title: Data set
 - contents:

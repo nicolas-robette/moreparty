@@ -3,6 +3,13 @@
 ## New function
 
 * `NodeTreePlot()`: plots the results of each node of a conditional inference tree
+* `PerfsRegression()`: performance measures for regression tasks
+* `PerfsBinClassif()`: performance measures for binary classification tasks
+
+## Changes in existing functions:
+
+* `NiceTreePlot()`: new arguments (cex and justmin)
+* `GetSplitStats()`: new summary element in the results + the function is no longer compatible with trees from the `party` package
 
 
 # moreparty 0.3.3 [CRAN]

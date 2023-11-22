@@ -55,6 +55,9 @@
     <loc>https://nicolas-robette.github.io/moreparty/reference/NodeTreePlot.html</loc>
   </url>
   <url>
+    <loc>https://nicolas-robette.github.io/moreparty/reference/NodesInfo.html</loc>
+  </url>
+  <url>
     <loc>https://nicolas-robette.github.io/moreparty/reference/Outliers.html</loc>
   </url>
   <url>
@@ -68,6 +71,9 @@
   </url>
   <url>
     <loc>https://nicolas-robette.github.io/moreparty/reference/SurrogateTree.html</loc>
+  </url>
+  <url>
+    <loc>https://nicolas-robette.github.io/moreparty/reference/TreeStab.html</loc>
   </url>
   <url>
     <loc>https://nicolas-robette.github.io/moreparty/reference/ctree-module.html</loc>

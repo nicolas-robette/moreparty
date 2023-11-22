@@ -33,6 +33,8 @@ reference:
   - GetSplitStats
   - NiceTreePlot
   - NodeTreePlot
+  - NodesInfo
+  - TreeStab
   - ctree-module
   - ictree
 

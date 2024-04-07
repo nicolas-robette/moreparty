@@ -46,13 +46,28 @@
     <loc>https://nicolas-robette.github.io/moreparty/reference/NiceTreePlot.html</loc>
   </url>
   <url>
+    <loc>https://nicolas-robette.github.io/moreparty/reference/NodeTreePlot.html</loc>
+  </url>
+  <url>
+    <loc>https://nicolas-robette.github.io/moreparty/reference/NodesInfo.html</loc>
+  </url>
+  <url>
     <loc>https://nicolas-robette.github.io/moreparty/reference/Outliers.html</loc>
+  </url>
+  <url>
+    <loc>https://nicolas-robette.github.io/moreparty/reference/PerfsBinClassif.html</loc>
+  </url>
+  <url>
+    <loc>https://nicolas-robette.github.io/moreparty/reference/PerfsRegression.html</loc>
   </url>
   <url>
     <loc>https://nicolas-robette.github.io/moreparty/reference/Prototypes.html</loc>
   </url>
   <url>
     <loc>https://nicolas-robette.github.io/moreparty/reference/SurrogateTree.html</loc>
+  </url>
+  <url>
+    <loc>https://nicolas-robette.github.io/moreparty/reference/TreeStab.html</loc>
   </url>
   <url>
     <loc>https://nicolas-robette.github.io/moreparty/reference/ctree-module.html</loc>

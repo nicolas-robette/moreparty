@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">moreparty</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4</span>
       </span>
     </div>
 
@@ -38,7 +38,13 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/nicolas-robette/moreparty/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -48,12 +54,44 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      
+      <small>Source: <a href="https://github.com/nicolas-robette/moreparty/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.1" id="moreparty-031-cran">moreparty 0.3.1 [CRAN]<a class="anchor" aria-label="anchor" href="#moreparty-031-cran"></a></h2>
-<ul><li>bug fix in vignettes due to changes in dependencies</li></ul></div>
+<h2 class="page-header" data-toc-text="0.4" id="moreparty-04">moreparty 0.4<small>2023-11-22</small><a class="anchor" aria-label="anchor" href="#moreparty-04"></a></h2>
+<div class="section level3">
+<h3 id="new-function-0-4">New function<a class="anchor" aria-label="anchor" href="#new-function-0-4"></a></h3>
+<ul><li>
+<code><a href="../reference/NodeTreePlot.html">NodeTreePlot()</a></code>: plots the results of each node of a conditional inference tree</li>
+<li>
+<code><a href="../reference/PerfsRegression.html">PerfsRegression()</a></code>: performance measures for regression tasks</li>
+<li>
+<code><a href="../reference/PerfsBinClassif.html">PerfsBinClassif()</a></code>: performance measures for binary classification tasks</li>
+<li>
+<code><a href="../reference/NodesInfo.html">NodesInfo()</a></code>: informations for each terminal node of a conditional inference tree</li>
+<li>
+<code><a href="../reference/TreeStab.html">TreeStab()</a></code>: assesses the stability of a conditional inference tree by using bootstrap replications</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changes-in-existing-functions-0-4">Changes in existing functions:<a class="anchor" aria-label="anchor" href="#changes-in-existing-functions-0-4"></a></h3>
+<ul><li>
+<code><a href="../reference/NiceTreePlot.html">NiceTreePlot()</a></code>: new arguments (cex and justmin)</li>
+<li>
+<code><a href="../reference/GetSplitStats.html">GetSplitStats()</a></code>: new summary element in the results + the function is no longer compatible with trees from the <code>party</code> package</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.3" id="moreparty-033-cran">moreparty 0.3.3 [CRAN]<small>2023-10-05</small><a class="anchor" aria-label="anchor" href="#moreparty-033-cran"></a></h2>
+<ul><li>dependency to 0.4.1 version of <code>vip</code> package</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.2" id="moreparty-032-cran">moreparty 0.3.2 [CRAN]<small>2023-08-09</small><a class="anchor" aria-label="anchor" href="#moreparty-032-cran"></a></h2>
+<ul><li>bug fixes due to change in <code>vip</code> package</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.1" id="moreparty-031-cran">moreparty 0.3.1 [CRAN]<small>2023-04-02</small><a class="anchor" aria-label="anchor" href="#moreparty-031-cran"></a></h2>
+<ul><li>bug fix in vignettes due to changes in dependencies</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3" id="moreparty-03-cran">moreparty 0.3 [CRAN]<small>2022-06-15</small><a class="anchor" aria-label="anchor" href="#moreparty-03-cran"></a></h2>
 <div class="section level3">
@@ -70,7 +108,8 @@
 <div class="section level3">
 <h3 id="changes-in-existing-functions-0-3">Changes in existing functions:<a class="anchor" aria-label="anchor" href="#changes-in-existing-functions-0-3"></a></h3>
 <ul><li>
-<code><a href="../reference/GetSplitStats.html">GetSplitStats()</a></code> : results have been rearranged and a ‘ratio’ column has been added</li></ul></div>
+<code><a href="../reference/GetSplitStats.html">GetSplitStats()</a></code> : results have been rearranged and a ‘ratio’ column has been added</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2" id="moreparty-02-cran">moreparty 0.2 [CRAN]<a class="anchor" aria-label="anchor" href="#moreparty-02-cran"></a></h2>
@@ -88,7 +127,8 @@
 <div class="section level3">
 <h3 id="changes-in-existing-functions-0-2">Changes in existing functions:<a class="anchor" aria-label="anchor" href="#changes-in-existing-functions-0-2"></a></h3>
 <ul><li>
-<code><a href="../reference/GetAleData.html">GetAleData()</a></code>: bug fix for regression tasks</li></ul></div>
+<code><a href="../reference/GetAleData.html">GetAleData()</a></code>: bug fix for regression tasks</li>
+</ul></div>
 </div>
   </div>
 

@@ -1,5 +1,7 @@
 # **moreparty** <img src="man/figures/moreparty.png" height=140px width=120px alt="" align="right" />
 
+<br>
+
 ## Tools for conditional inference trees and random forests
 
   <!-- badges: start -->

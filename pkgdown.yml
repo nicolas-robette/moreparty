@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Titanic_example: Titanic_example.html
-last_built: 2024-04-07T13:36Z
+last_built: 2024-04-07T13:38Z
 urls:
   reference: https://nicolas-robette.github.io/moreparty/reference
   article: https://nicolas-robette.github.io/moreparty/articles

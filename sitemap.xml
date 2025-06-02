@@ -1,99 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/404.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/articles/Titanic_example.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/BivariateAssoc.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/EasyTreeVarImp.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/FeatureSelection.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/GetAleData.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/GetCtree.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/GetInteractionStrength.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/GetPartialData.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/GetSplitStats.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/NiceTreePlot.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/NodeTreePlot.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/NodesInfo.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/Outliers.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/PerfsBinClassif.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/PerfsRegression.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/Prototypes.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/SurrogateTree.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/TreeStab.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/ctree-module.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/fastcforest.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/fastvarImp.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/fastvarImpAUC.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/ggForestEffects.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/ggVarImp.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/ictree.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nicolas-robette.github.io/moreparty/reference/titanic.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://nicolas-robette.github.io/moreparty/404.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/articles/Titanic_example.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/articles/index.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/authors.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/index.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/news/index.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/BivariateAssoc.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/EasyTreeVarImp.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/FeatureSelection.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/GetAleData.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/GetCtree.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/GetInteractionStrength.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/GetPartialData.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/GetSplitStats.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/NiceTreePlot.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/NodeTreePlot.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/NodesInfo.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/Outliers.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/PerfsBinClassif.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/PerfsRegression.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/Prototypes.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/SurrogateTree.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/TreeStab.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/ctree-module.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/fastcforest.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/fastvarImp.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/fastvarImpAUC.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/ggForestEffects.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/ggVarImp.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/ictree.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/index.html</loc></url>
+<url><loc>https://nicolas-robette.github.io/moreparty/reference/titanic.html</loc></url>
 </urlset>
+
